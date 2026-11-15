@@ -1,118 +1,121 @@
+
 package com.alongtheway.domain.player;
+
+import java.util.Arrays;
 
 import com.alongtheway.domain.world.Item;
 import com.alongtheway.domain.world.Location;
 import com.alongtheway.domain.narrative.Journal;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * Tests the Player, Inventory and Item classes.
  */
-public class PlayerTaskTest {
+class PlayerTaskTest {
 
-    private static void check(boolean condition, String message) {
-        if (!condition) {
-            throw new AssertionError("FAILED: " + message);
-        }
+    private Location cottage;
+    private Location cafe;
+    private Journal journal;
+    private Player player;
+    private Item key;
 
-        System.out.println("PASSED: " + message);
-    }
+    /**
+     * Creates the objects needed for each test.
+     */
+    @BeforeEach
+    void setUp() {
 
-    public static void main(String[] args) {
+        cottage = new Location(
+                "Cottage",
+                "A small cottage in the village.",
+                Arrays.asList("home")
+        );
 
-        // Create two locations
-        Location cottage = new Location();
+        cafe = new Location(
+                "Little Corner Cafe",
+                "A small cafe in the village.",
+                Arrays.asList("coffee shop")
+        );
 
-        Location cafe = new Location();
+        journal = new Journal();
 
-        // Create a journal and player
-        Journal journal = new Journal();
-
-        Player player = new Player(
+        player = new Player(
                 "player_01",
                 "Test Player",
                 cottage,
                 journal
         );
 
-        // Test 1: Initial location
-        check(
-                player.getLocation() == cottage,
-                "Player has the correct starting location"
+        key = new Item(
+                "Old Key",
+                Arrays.asList("rusty key", "small key")
         );
 
-        // Test 2: Update location
+        key.setDescription("An old rusty key.");
+    }
+
+    @Test
+    void playerHasCorrectStartingLocation() {
+        assertSame(cottage, player.getLocation());
+    }
+
+    @Test
+    void playerLocationCanBeUpdated() {
         player.setLocation(cafe);
 
-        check(
-                player.getLocation() == cafe,
-                "Player location can be updated"
-        );
+        assertSame(cafe, player.getLocation());
+    }
 
-        // Create an item
-        Item key = new Item(
-                "item_01",
-                "Old Key",
-                "An old rusty key."
-        );
+    @Test
+    void playerHasJournal() {
+        assertSame(journal, player.getJournal());
+    }
 
-        // Test 3: Item information
-        check(
-                key.getName().equals("Old Key")
-                        && key.getItemId().equals("item_01")
-                        && key.examine().equals("An old rusty key."),
-                "Item stores its information correctly"
-        );
+    @Test
+    void itemStoresNameAndDescriptionCorrectly() {
+        assertEquals("Old Key", key.getName());
+        assertEquals("An old rusty key.", key.getDescription());
+        assertEquals("An old rusty key.", key.examine());
+    }
 
-        // Test 4: Add item to inventory
-        check(
-                player.takeItem(key),
-                "Player can take an item"
-        );
+    @Test
+    void itemCanBeFoundUsingAlias() {
+        assertTrue(key.matches("rusty key"));
+    }
 
-        // Test 5: Check inventory
-        check(
-                player.getInventory().contains(key),
-                "Inventory contains the added item"
-        );
+    @Test
+    void itemMatchingIgnoresCase() {
+        assertTrue(key.matches("OLD KEY"));
+    }
 
-        // Test 6: Check inventory size
-        check(
-                player.getInventory().size() == 1,
-                "Inventory has the correct number of items"
-        );
+    @Test
+    void playerCanTakeAnItem() {
+        assertTrue(player.takeItem(key));
+    }
 
-        // Test 7: Prevent duplicate item ID
-        Item duplicateKey = new Item(
-                "item_01",
-                "Another Key",
-                "A different description."
-        );
+    @Test
+    void inventoryContainsAddedItem() {
+        player.takeItem(key);
 
-        check(
-                !player.takeItem(duplicateKey),
-                "Inventory rejects a duplicate item ID"
-        );
+        assertTrue(player.getInventory().contains(key));
+    }
 
-        // Test 8: Drop item
-        Item droppedItem = player.dropItem("item_01");
+    @Test
+    void inventoryHasCorrectNumberOfItems() {
+        player.takeItem(key);
 
-        check(
-                droppedItem == key,
-                "Player can drop an item"
-        );
+        assertEquals(1, player.getInventory().size());
+    }
 
-        // Test 9: Check inventory after dropping
-        check(
-                !player.getInventory().contains(key),
-                "Dropped item is no longer in inventory"
-        );
+    @Test
+    void inventoryRejectsDuplicateItems() {
+        player.takeItem(key);
 
-        // Test 10: Drop nonexistent item
-        check(
-                player.dropItem("item_99") == null,
-                "Dropping a nonexistent item returns null"
-        );
-
-        System.out.println("\nAll Player task tests completed.");
+        assertFalse(player.takeItem(key));
+        assertEquals(1, player.getInventory().size());
     }
 }

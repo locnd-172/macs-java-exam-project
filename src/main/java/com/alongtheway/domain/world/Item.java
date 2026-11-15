@@ -24,6 +24,16 @@ public class Item {
 		this.aliases = aliases;
 	}
 
+
+	/**
+	 * Returns the unique ID of the item.
+	 *
+	 * @return the item's ID
+	 */
+	public UUID getItemId() {
+		return itemId;
+	}
+
 	/**
 	 * Returns the item's description for examination.
 	 *
