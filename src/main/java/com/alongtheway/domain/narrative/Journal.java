@@ -4,16 +4,13 @@ package com.alongtheway.domain.narrative;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alongtheway.config.GameConstants;
+
 /**
  * Stores the memories and entries discovered by the player.
  * The player can add entries and review them later.
  */
 public class Journal {
-
-    // Display message constants
-    private static final String EMPTY_MESSAGE = "Your journal is empty.";
-    private static final String JOURNAL_HEADER = "===== YOUR JOURNAL =====\n";
-    private static final String ENTRY_HEADER = "\nEntry ";
 
     private List<JournalEntry> entries;
 
@@ -71,16 +68,16 @@ public class Journal {
     public String toDisplayString() {
 
         if (entries.isEmpty()) {
-            return EMPTY_MESSAGE;
+            return GameConstants.Journal.EMPTY_MESSAGE;
         }
 
         StringBuilder result = new StringBuilder();
 
-        result.append(JOURNAL_HEADER);
+        result.append(GameConstants.Journal.HEADER);
 
         for (int i = 0; i < entries.size(); i++) {
 
-            result.append(ENTRY_HEADER).append(i + 1).append("\n");
+            result.append(GameConstants.Journal.ENTRY_HEADER).append(i + 1).append("\n");
             result.append(entries.get(i).toString());
             result.append("\n");
         }
