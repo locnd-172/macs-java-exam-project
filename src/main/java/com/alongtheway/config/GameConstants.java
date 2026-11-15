@@ -26,4 +26,17 @@ public final class GameConstants {
 		}
 	}
 
+	/**
+	 * Contains constants related to the player's journal.
+	 */
+	public static final class Journal {
+
+		private Journal() {
+		}
+
+		public static final String EMPTY_MESSAGE = "Your journal is empty.";
+		public static final String HEADER = "===== YOUR JOURNAL =====\n";
+		public static final String ENTRY_HEADER = "\nEntry ";
+	}
+
 }
