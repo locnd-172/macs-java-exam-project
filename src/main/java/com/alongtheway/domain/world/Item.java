@@ -15,7 +15,7 @@ public class Item {
 	/**
 	 * Creates an item.
 	 *
-	 * @param name the item's name
+	 * @param name    the item's name
 	 * @param aliases alternate names used to identify the item
 	 */
 	public Item(String name, List<String> aliases) {
@@ -23,6 +23,7 @@ public class Item {
 		this.name = name;
 		this.aliases = aliases;
 	}
+
 	/**
 	 * Returns the unique ID of the item.
 	 *
@@ -98,7 +99,7 @@ public class Item {
 	/**
 	 * Checks a normalized query against one name or alias.
 	 *
-	 * @param query the normalized query
+	 * @param query  the normalized query
 	 * @param source the name or alias being checked
 	 * @return true if either value contains the other
 	 */
