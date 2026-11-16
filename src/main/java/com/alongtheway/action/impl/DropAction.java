@@ -1,6 +1,7 @@
 package com.alongtheway.action.impl;
 
 import com.alongtheway.action.Action;
+import com.alongtheway.domain.GameSession;
 import com.alongtheway.parser.Command;
 
 public class DropAction implements Action {
@@ -16,7 +17,7 @@ public class DropAction implements Action {
 	}
 
 	@Override
-	public void execute() {
+	public void execute(GameSession session) {
 		// TODO: Implement when Player and GameSession are available.
 	}
 }

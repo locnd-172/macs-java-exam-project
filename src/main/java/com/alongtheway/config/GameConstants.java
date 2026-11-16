@@ -1,6 +1,7 @@
 package com.alongtheway.config;
 
 import com.alongtheway.config.constants.CommandConstants;
+import com.alongtheway.config.constants.MessageConstants;
 import com.alongtheway.config.constants.TextConstants;
 
 public final class GameConstants {
@@ -23,6 +24,11 @@ public final class GameConstants {
 
 	public static final class Commands extends CommandConstants {
 		private Commands() {
+		}
+	}
+
+	public static final class Messages extends MessageConstants {
+		private Messages() {
 		}
 	}
 
