@@ -2,7 +2,9 @@ package com.alongtheway.domain.world;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
+import com.alongtheway.config.GameConstants;
 import com.alongtheway.util.TextUtils;
 
 public class Character {
@@ -45,7 +47,7 @@ public class Character {
 	}
 
 	/**
-	 * Checks whether the query partially matches the character's name or an alias,
+	 * Matches the query against the character's name or aliases at word boundaries,
 	 * ignoring case and normalized punctuation and whitespace.
 	 *
 	 * @param query the text to match
@@ -79,19 +81,24 @@ public class Character {
 	}
 
 	/**
-	 * Normalizes both values and performs a partial match in either direction.
+	 * Normalizes both values and matches them at whole word level.
 	 *
 	 * @param query the text entered by the player
 	 * @param source the name or alias being checked
-	 * @return true if either normalized value contains the other
+	 * @return true if either value contains the other as complete words
 	 */
 	private boolean match(String query, String source) {
 		String tQuery = TextUtils.normalize(query);
 		String tSource = TextUtils.normalize(source);
-		return !tQuery.isBlank()
-			&& !tSource.isBlank()
-			&& (tQuery.contains(tSource) || tSource.contains(tQuery)
-		);
+		if (tQuery.isBlank() || tSource.isBlank()) return false;
+
+		return containsWords(tQuery, tSource) || containsWords(tSource, tQuery);
+	}
+
+	private boolean containsWords(String text, String words) {
+		String boundary = GameConstants.Text.WORD_BOUNDARY_REGEX;
+		String pattern = boundary + Pattern.quote(words) + boundary;
+		return Pattern.compile(pattern).matcher(text).find();
 	}
 
 }
