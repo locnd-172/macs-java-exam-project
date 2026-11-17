@@ -8,4 +8,5 @@ public abstract class TextConstants {
 	public static final String SPACE = " ";
 	public static final String NORMALIZE_FILTER_REGEX = "[^a-z0-9 ]";
 	public static final String WHITESPACE_REGEX = "\\s+";
+	public static final String WORD_BOUNDARY_REGEX = "\\b";
 }

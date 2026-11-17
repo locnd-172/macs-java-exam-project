@@ -6,6 +6,7 @@ public enum CommandVerb {
 	MOVE,
 	EXAMINE,
 	DROP,
+	TALK,
 	UNKNOWN;
 
 	/**
@@ -19,6 +20,7 @@ public enum CommandVerb {
 		if (GameConstants.Commands.MOVE_TOKENS.contains(token)) return MOVE;
 		if (GameConstants.Commands.EXAMINE_TOKENS.contains(token)) return EXAMINE;
 		if (GameConstants.Commands.DROP_TOKENS.contains(token)) return DROP;
+		if (GameConstants.Commands.TALK_TOKENS.contains(token)) return TALK;
 		return UNKNOWN;
 	}
 }

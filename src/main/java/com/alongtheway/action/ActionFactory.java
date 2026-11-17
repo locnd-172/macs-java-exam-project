@@ -3,6 +3,7 @@ package com.alongtheway.action;
 import com.alongtheway.action.impl.DropAction;
 import com.alongtheway.action.impl.ExamineAction;
 import com.alongtheway.action.impl.MoveAction;
+import com.alongtheway.action.impl.TalkAction;
 import com.alongtheway.parser.Command;
 
 public class ActionFactory {
@@ -18,6 +19,7 @@ public class ActionFactory {
 			case MOVE -> new MoveAction(command);
 			case EXAMINE -> new ExamineAction(command);
 			case DROP -> new DropAction(command);
+			case TALK -> new TalkAction(command);
 			default -> null;
 		};
 	}
