@@ -2,13 +2,13 @@ package com.alongtheway.domain.world;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import com.alongtheway.domain.narrative.Scenario;
+import com.alongtheway.util.TextUtils;
 
 public class Location {
 
-	private final UUID locationId;
+	private final String locationId;
 	private String name;
 	private String description;
 	private List<String> aliases = new ArrayList<>();
@@ -20,15 +20,34 @@ public class Location {
 	/**
 	 * Creates a location with the supplied descriptive data.
 	 *
-	 * @param name the location's name
+	 * @param locationId  the location's stable ID
+	 * @param name        the location's name
 	 * @param description the location's description
-	 * @param aliases alternate names used to identify the location
+	 * @param aliases     alternate names used to identify the location
 	 */
-	public Location(String name, String description, List<String> aliases) {
-		this.locationId = UUID.randomUUID();
+	public Location(String locationId, String name, String description, List<String> aliases) {
+		this.locationId = locationId;
 		this.name = name;
 		this.description = description;
 		if (aliases != null) this.aliases.addAll(aliases);
+	}
+
+	/**
+	 * Returns the location's ID.
+	 *
+	 * @return the location ID
+	 */
+	public String getLocationId() {
+		return locationId;
+	}
+
+	/**
+	 * Returns location's name.
+	 *
+	 * @return the location's name
+	 */
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -128,4 +147,27 @@ public class Location {
 		return this.links.contains(otherLocation);
 	}
 
+	/**
+	 * Checks whether the query matches the location's name or an alias.
+	 *
+	 * @param query the text to match
+	 * @return true if the name or an alias matches
+	 */
+	public boolean match(String query) {
+		String tQuery = TextUtils.normalize(query);
+		if (tQuery.isBlank()) return false;
+
+		if (matchesText(tQuery, this.name)) return true;
+
+		for (String alias : aliases) {
+			if (matchesText(tQuery, alias)) return true;
+		}
+		return false;
+	}
+
+	private boolean matchesText(String query, String source) {
+		String tSource = TextUtils.normalize(source);
+		return !tSource.isBlank()
+			&& (tSource.contains(query) || query.contains(tSource));
+	}
 }

@@ -18,9 +18,9 @@ class LocationTest {
 
 	@BeforeEach
 	void setUp() {
-		square = new Location("village square", "village square description", List.of());
-		cafe = new Location("café", "café description", List.of());
-		bookshop = new Location("old Bookshop", "old bookshop description", List.of());
+		square = new Location("village-square", "village square", "village square description", List.of());
+		cafe = new Location("cafe", "café", "café description", List.of());
+		bookshop = new Location("old-bookshop", "old bookshop", "old bookshop description", List.of());
 	}
 
 	@Test

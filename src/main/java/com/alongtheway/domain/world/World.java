@@ -1,31 +1,52 @@
 package com.alongtheway.domain.world;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class World {
-	private final List<Location> locations = new ArrayList<>();
+	private final Map<String, Location> locations = new LinkedHashMap<>();
 	private Location startingLocation;
 
 	/**
-	 * Adds a location unless it is NULL or already present.
+	 * Adds a location unless it is null or its ID is already present.
 	 *
 	 * @param location the location to add
 	 */
 	public void addLocation(Location location) {
-		if (location != null && !locations.contains(location)) {
-			locations.add(location);
+		if (location != null) {
+			locations.putIfAbsent(location.getLocationId(), location);
+		}
+	}
+
+	public void addLocations(List<Location> locations) {
+		if (locations == null || locations.isEmpty()) {
+			return;
+		}
+		for (Location location : locations) {
+			addLocation(location);
 		}
 	}
 
 	/**
-	 * Returns this world's mutable location list.
-	 * Changes to the returned list directly affect this world.
+	 * Returns this world's mutable map of locations by ID.
+	 * Changes to the returned map directly affect this world.
 	 *
-	 * @return this world's location list
+	 * @return this world's location map
 	 */
-	public List<Location> getLocations() {
+	public Map<String, Location> getLocations() {
 		return this.locations;
+	}
+
+	/**
+	 * Finds a location by its ID.
+	 *
+	 * @param locationId the location ID
+	 * @return the location, or null if its ID is not present
+	 */
+	public Location getLocationById(String locationId) {
+		return locations.get(locationId);
 	}
 
 	/**
@@ -54,9 +75,24 @@ public class World {
 	 * @return the location's internal link list, or an empty list
 	 */
 	public List<Location> getLinks(Location location) {
-		if (location == null || !locations.contains(location)) {
+		if (location == null || locations.get(location.getLocationId()) != location) {
 			return new ArrayList<>();
 		}
 		return location.getLinks();
+	}
+
+	/**
+	 * Finds the first location whose name or alias matches the query.
+	 *
+	 * @param query the location name or alias to search for
+	 * @return the matching location, or null if none matches
+	 */
+	public Location findLocation(String query) {
+		for (Location location : locations.values()) {
+			if (location.match(query)) {
+				return location;
+			}
+		}
+		return null;
 	}
 }

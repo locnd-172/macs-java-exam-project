@@ -30,12 +30,14 @@ class PlayerTaskTest {
     void setUp() {
 
         cottage = new Location(
+                "cottage",
                 "Cottage",
                 "A small cottage in the village.",
                 Arrays.asList("home")
         );
 
         cafe = new Location(
+                "cafe",
                 "Little Corner Cafe",
                 "A small cafe in the village.",
                 Arrays.asList("coffee shop")

@@ -2,10 +2,12 @@ package com.alongtheway.domain.world;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,10 +23,10 @@ class WorldTest {
 	void setUp() {
 		world = new World();
 
-		square = new Location("village square", "square description", List.of());
-		cafe = new Location("café", "café description", List.of());
-		outsideWorld = new Location("outside the village", "outside description", List.of());
-		entrance = new Location("village entrance", "village entrance description", List.of());
+		square = new Location("village-square", "village square", "square description", List.of("town centre"));
+		cafe = new Location("cafe", "café", "café description", List.of());
+		outsideWorld = new Location("outside", "outside the village", "outside description", List.of());
+		entrance = new Location("entrance", "village entrance", "village entrance description", List.of());
 	}
 
 	@Test
@@ -32,14 +34,29 @@ class WorldTest {
 		world.addLocation(null);
 		world.addLocation(square);
 		world.addLocation(square);
+		world.addLocation(new Location("village-square", "another square", "", List.of()));
 
-		List<Location> locations = world.getLocations();
+		Map<String, Location> locations = world.getLocations();
 
 		assertEquals(1, locations.size());
-		assertSame(square, locations.get(0));
+		assertSame(square, locations.get("village-square"));
+		assertSame(square, world.getLocationById("village-square"));
+		assertNull(world.getLocationById("missing"));
 
 		locations.clear();
 		assertEquals(0, world.getLocations().size());
+	}
+
+	@Test
+	void testFindLocation() {
+		world.addLocation(square);
+		world.addLocation(cafe);
+
+		assertSame(square, world.findLocation("VILLAGE SQUARE"));
+		assertSame(square, world.findLocation("  TOWN-CENTRE! "));
+		assertNull(world.findLocation("unknown"));
+		assertNull(world.findLocation("!!!"));
+		assertNull(world.findLocation(null));
 	}
 
 	@Test
