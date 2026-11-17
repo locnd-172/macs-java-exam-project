@@ -63,12 +63,12 @@ public class Location {
 	/**
 	 * Finds the first attached character whose name or alias matches the query.
 	 *
-	 * @param name the character name or alias to search for
+	 * @param query the character name or alias to search for
 	 * @return the matching character
 	 */
-	public Character findCharacter(String name) {
+	public Character findCharacter(String query) {
 		for (Character character : this.characters) {
-			if (character.find(name)) {
+			if (character.find(query)) {
 				return character;
 			}
 		}

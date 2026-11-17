@@ -22,7 +22,6 @@ public class MoveAction implements Action {
 	@Override
 	public void execute(GameSession session) {
 		String target = command.getTarget();
-		System.out.println(target);
 		Location destination = session.getWorld().findLocation(target);
 
 		if (destination == null) {
