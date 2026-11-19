@@ -85,6 +85,22 @@ public class Inventory {
     }
 
     /**
+     * Finds an inventory item by name or alias.
+     *
+     * @param query the name or alias to search
+     * @return the matching item, or NULL when no item matches
+     */
+    public Item findItem(String query) {
+        for (Item item : items) {
+            if (item.matches(query)) {
+                return item;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Checks whether an item with the given ID exists.
      *
      * @param itemId ID of the item

@@ -2,8 +2,10 @@ package com.alongtheway.action;
 
 import com.alongtheway.action.impl.DropAction;
 import com.alongtheway.action.impl.ExamineAction;
+import com.alongtheway.action.impl.HelpAction;
 import com.alongtheway.action.impl.MoveAction;
 import com.alongtheway.action.impl.TalkAction;
+import com.alongtheway.action.impl.UseAction;
 import com.alongtheway.parser.Command;
 
 public class ActionFactory {
@@ -20,6 +22,7 @@ public class ActionFactory {
 			case EXAMINE -> new ExamineAction(command);
 			case DROP -> new DropAction(command);
 			case TALK -> new TalkAction(command);
+			case USE -> new UseAction(command);
 			default -> null;
 		};
 	}
