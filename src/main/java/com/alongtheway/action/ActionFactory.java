@@ -23,6 +23,7 @@ public class ActionFactory {
 			case DROP -> new DropAction(command);
 			case TALK -> new TalkAction(command);
 			case USE -> new UseAction(command);
+			case HELP -> new HelpAction(command);
 			default -> null;
 		};
 	}

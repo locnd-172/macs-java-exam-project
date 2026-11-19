@@ -21,5 +21,8 @@ public abstract class CommandConstants {
 	public static final Set<String> USE_TOKENS = Set.of(
 		"use", "try"
 	);
+	public static final Set<String> HELP_TOKENS = Set.of(
+		"help", "offer"
+	);
 	public static final String TALK_TOPIC_SEPARATOR = "(?i)about";
 }
