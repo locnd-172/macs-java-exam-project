@@ -28,7 +28,6 @@ public class Player {
 	 * @param journal  player's journal
 	 */
 	public Player(String playerId, String name, Location location, Journal journal) {
-
 		this.playerId = playerId;
 		this.name = name;
 		this.location = location;

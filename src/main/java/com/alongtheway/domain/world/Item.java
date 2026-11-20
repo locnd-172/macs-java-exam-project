@@ -38,7 +38,7 @@ public class Item {
 	/**
 	 * Returns the item's description for examination.
 	 *
-	 * @return the description, or NULL if none has been assigned
+	 * @return the description, or null if none has been assigned
 	 */
 	public String examine() {
 		return this.description;
@@ -65,7 +65,7 @@ public class Item {
 	/**
 	 * Returns the item's current description.
 	 *
-	 * @return the description, or NULL if none has been assigned
+	 * @return the description, or null if none has been assigned
 	 */
 	public String getDescription() {
 		return description;

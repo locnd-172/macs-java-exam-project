@@ -1,6 +1,7 @@
 package com.alongtheway.util;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import com.alongtheway.config.GameConstants;
@@ -24,7 +25,7 @@ public final class TextUtils {
 		if (value == null) {
 			return GameConstants.Text.EMPTY;
 		}
-		return value.toLowerCase()
+		return value.toLowerCase(Locale.ROOT)
 		            .replaceAll(GameConstants.Text.NORMALIZE_FILTER_REGEX, GameConstants.Text.SPACE)
 		            .trim()
 		            .replaceAll(GameConstants.Text.WHITESPACE_REGEX, GameConstants.Text.SPACE);
@@ -33,7 +34,7 @@ public final class TextUtils {
 	/**
 	 * Matches a query against any candidate.
 	 * Both sides are normalized and compared as whole words in either direction.
-	 * A NULL candidate list does not match.
+	 * A null candidate list does not match.
 	 *
 	 * @param query      the input text
 	 * @param candidates the candidate to check

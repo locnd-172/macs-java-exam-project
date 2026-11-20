@@ -60,7 +60,7 @@ public class Location {
 	}
 
 	/**
-	 * Adds a character unless it is NULL or already attached to this location.
+	 * Adds a character unless it is null or already attached to this location.
 	 *
 	 * @param character the character to add
 	 */
@@ -84,7 +84,7 @@ public class Location {
 	}
 
 	/**
-	 * Adds an item unless it is NULL or already attached to this location.
+	 * Adds an item unless it is null or already attached to this location.
 	 *
 	 * @param item the item to add
 	 */

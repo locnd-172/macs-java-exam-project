@@ -27,7 +27,6 @@ public class Inventory {
 	 * @return true if the item was added, otherwise false
 	 */
 	public boolean addItem(Item item) {
-
 		if (item == null || contains(item.getItemId())) {
 			return false;
 		}
@@ -43,7 +42,6 @@ public class Inventory {
 	 * @return true if the item was removed, otherwise false
 	 */
 	public boolean removeItem(Item item) {
-
 		if (item == null) {
 			return false;
 		}
@@ -77,7 +75,6 @@ public class Inventory {
 	 * @return true if the item exists, otherwise false
 	 */
 	public boolean contains(Item item) {
-
 		if (item == null) {
 			return false;
 		}
@@ -89,7 +86,7 @@ public class Inventory {
 	 * Finds an inventory item by name or alias.
 	 *
 	 * @param query the name or alias to search
-	 * @return the matching item, or NULL when no item matches
+	 * @return the matching item, or null when no item matches
 	 */
 	public Item findItem(String query) {
 		return items.stream()
