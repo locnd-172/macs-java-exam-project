@@ -78,7 +78,7 @@ public class Location {
 	 */
 	public Character findCharacter(String query) {
 		return characters.stream()
-		                 .filter(character -> character.find(query))
+		                 .filter(character -> character.match(query))
 		                 .findFirst()
 		                 .orElse(null);
 	}
@@ -102,7 +102,7 @@ public class Location {
 	 */
 	public Item findItem(String name) {
 		return items.stream()
-		            .filter(item -> item.matches(name))
+		            .filter(item -> item.match(name))
 		            .findFirst()
 		            .orElse(null);
 	}
@@ -164,16 +164,9 @@ public class Location {
 	 * @return true if the name or an alias matches
 	 */
 	public boolean match(String query) {
-		String tQuery = TextUtils.normalize(query);
-		if (tQuery.isBlank()) return false;
-
-		if (matchesText(tQuery, this.name)) return true;
-
-		return aliases.stream().anyMatch(alias -> matchesText(tQuery, alias));
-	}
-
-	private boolean matchesText(String query, String source) {
-		String tSource = TextUtils.normalize(source);
-		return !tSource.isBlank() && (tSource.contains(query) || query.contains(tSource));
+		List<String> candidates = new ArrayList<>();
+		candidates.add(name);
+		candidates.addAll(aliases);
+		return TextUtils.match(query, candidates);
 	}
 }

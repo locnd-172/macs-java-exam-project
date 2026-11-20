@@ -1,10 +1,9 @@
 package com.alongtheway.domain.world;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Pattern;
 
-import com.alongtheway.config.GameConstants;
 import com.alongtheway.util.TextUtils;
 
 public class Item {
@@ -12,7 +11,7 @@ public class Item {
 	private final UUID itemId;
 	private String name;
 	private String description;
-	private final List<String> aliases;
+	private List<String> aliases = new ArrayList<>();
 
 	/**
 	 * Creates an item.
@@ -23,7 +22,7 @@ public class Item {
 	public Item(String name, List<String> aliases) {
 		this.itemId = UUID.randomUUID();
 		this.name = name;
-		this.aliases = aliases;
+		if (aliases != null) this.aliases.addAll(aliases);
 	}
 
 	/**
@@ -82,36 +81,15 @@ public class Item {
 	}
 
 	/**
-	 * Matches the query against the item's name or aliases at word level,
-	 * ignoring case and normalized punctuation and whitespace.
+	 * Matches the query against the item's name or aliases.
 	 *
 	 * @param query the text to match
 	 * @return true if the name or an alias matches
 	 */
-	public boolean matches(String query) {
-		String tQuery = TextUtils.normalize(query);
-		if (tQuery.isBlank()) return false;
-		if (matchesName(tQuery, name)) return true;
-		return aliases.stream().anyMatch(alias -> matchesName(tQuery, alias));
-	}
-
-	/**
-	 * Checks a normalized query against one name or alias.
-	 *
-	 * @param query  the normalized query
-	 * @param source the name or alias being checked
-	 * @return true if either value contains the other
-	 */
-	private boolean matchesName(String query, String source) {
-		String tSource = TextUtils.normalize(source);
-		if (tSource.isBlank()) return false;
-
-		return containsWords(query, tSource) || containsWords(tSource, query);
-	}
-
-	private boolean containsWords(String text, String words) {
-		String boundary = GameConstants.Text.WORD_BOUNDARY_REGEX;
-		String pattern = boundary + Pattern.quote(words) + boundary;
-		return Pattern.compile(pattern).matcher(text).find();
+	public boolean match(String query) {
+		List<String> candidates = new ArrayList<>();
+		candidates.add(name);
+		candidates.addAll(aliases);
+		return TextUtils.match(query, candidates);
 	}
 }

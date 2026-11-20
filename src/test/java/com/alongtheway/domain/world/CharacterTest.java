@@ -12,36 +12,36 @@ class CharacterTest {
 	@Test
 	void testNameMatch() {
 		Character character = new Character("Ada", "Bookshop owner", List.of("bookseller"));
-		assertTrue(character.find("  ADA!!!  "));
-		assertTrue(character.find("talk to Ada"));
-		assertFalse(character.find("ad"));
-		assertFalse(character.find("madam"));
+		assertTrue(character.match("  ADA!!!  "));
+		assertTrue(character.match("talk to Ada"));
+		assertFalse(character.match("ad"));
+		assertFalse(character.match("madam"));
 	}
 
 	@Test
 	void testAliasMatch() {
 		Character character = new Character("Ada", "Bookshop owner",
 				List.of("BookShop   Owner!", "BOOKSELLER", "Keeper of the old shop"));
-		assertTrue(character.find("  THE bookshop-owner!! "));
-		assertTrue(character.find("bookseller"));
-		assertTrue(character.find("talk to the keeper of the old shop"));
-		assertTrue(character.find("OLD-SHOP"));
-		assertFalse(character.find("booksellers"));
+		assertTrue(character.match("  THE bookshop-owner!! "));
+		assertTrue(character.match("bookseller"));
+		assertTrue(character.match("talk to the keeper of the old shop"));
+		assertTrue(character.match("OLD-SHOP"));
+		assertFalse(character.match("booksellers"));
 	}
 
 	@Test
 	void testPartialAlias() {
 		Character character = new Character("Ada", "Bookshop owner", List.of("the shop owner"));
-		assertTrue(character.find("shop owner"));
-		assertTrue(character.find("talk to the shop owner"));
-		assertFalse(character.find("shop own"));
+		assertTrue(character.match("shop owner"));
+		assertTrue(character.match("talk to the shop owner"));
+		assertFalse(character.match("shop own"));
 	}
 
 	@Test
 	void testInvalidQuery() {
 		Character character = new Character("Ada", "Bookshop owner", List.of("bookseller"));
-		assertFalse(character.find("  "));
-		assertFalse(character.find("!!!"));
-		assertFalse(character.find("Thomas"));
+		assertFalse(character.match("  "));
+		assertFalse(character.match("!!!"));
+		assertFalse(character.match("Thomas"));
 	}
 }

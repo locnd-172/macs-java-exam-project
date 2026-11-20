@@ -93,7 +93,7 @@ public class Inventory {
 	 */
 	public Item findItem(String query) {
 		return items.stream()
-		            .filter(item -> item.matches(query))
+		            .filter(item -> item.match(query))
 		            .findFirst()
 		            .orElse(null);
 	}
