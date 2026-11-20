@@ -1,4 +1,3 @@
-
 package com.alongtheway.domain.narrative;
 
 import java.util.ArrayList;
@@ -12,76 +11,76 @@ import com.alongtheway.config.GameConstants;
  */
 public class Journal {
 
-    private List<JournalEntry> entries;
+	private List<JournalEntry> entries;
 
-    /**
-     * Creates an empty journal.
-     */
-    public Journal() {
-        entries = new ArrayList<>();
-    }
+	/**
+	 * Creates an empty journal.
+	 */
+	public Journal() {
+		entries = new ArrayList<>();
+	}
 
-    /**
-     * Adds a new entry to the journal.
-     *
-     * @param entry the journal entry to add
-     */
-    public void addEntry(JournalEntry entry) {
+	/**
+	 * Adds a new entry to the journal.
+	 *
+	 * @param entry the journal entry to add
+	 */
+	public void addEntry(JournalEntry entry) {
 
-        if (entry != null) {
-            entries.add(entry);
-        }
-    }
+		if (entry != null) {
+			entries.add(entry);
+		}
+	}
 
-    /**
-     * Returns all entries stored in the journal.
-     *
-     * @return a list of journal entries
-     */
-    public List<JournalEntry> listEntries() {
-        return new ArrayList<>(entries);
-    }
+	/**
+	 * Returns all entries stored in the journal.
+	 *
+	 * @return a list of journal entries
+	 */
+	public List<JournalEntry> listEntries() {
+		return new ArrayList<>(entries);
+	}
 
-    /**
-     * Returns the number of entries in the journal.
-     *
-     * @return number of entries
-     */
-    public int size() {
-        return entries.size();
-    }
+	/**
+	 * Returns the number of entries in the journal.
+	 *
+	 * @return number of entries
+	 */
+	public int size() {
+		return entries.size();
+	}
 
-    /**
-     * Checks whether the journal has any entries.
-     *
-     * @return true if the journal is empty
-     */
-    public boolean isEmpty() {
-        return entries.isEmpty();
-    }
+	/**
+	 * Checks whether the journal has any entries.
+	 *
+	 * @return true if the journal is empty
+	 */
+	public boolean isEmpty() {
+		return entries.isEmpty();
+	}
 
-    /**
-     * Creates a readable string containing all journal entries.
-     *
-     * @return formatted journal contents
-     */
-    public String toDisplayString() {
+	/**
+	 * Creates a readable string containing all journal entries.
+	 *
+	 * @return formatted journal contents
+	 */
+	public String toDisplayString() {
 
-        if (entries.isEmpty()) {
-            return GameConstants.Journal.EMPTY_MESSAGE;
-        }
+		if (entries.isEmpty()) {
+			return GameConstants.Journal.EMPTY_MESSAGE;
+		}
 
-        StringBuilder result = new StringBuilder();
+		StringBuilder result = new StringBuilder();
 
-        result.append(GameConstants.Journal.HEADER);
+		result.append(GameConstants.Journal.HEADER);
 
-        for (int i = 0; i < entries.size(); i++) {
+		for (int i = 0; i < entries.size(); i++) {
 
-            result.append(GameConstants.Journal.ENTRY_HEADER).append(i + 1).append("\n");
-            result.append(entries.get(i).toString());
-            result.append("\n");
-        }
+			result.append(GameConstants.Journal.ENTRY_HEADER).append(i + 1).append("\n");
+			result.append(entries.get(i).toString());
+			result.append("\n");
+		}
 
-        return result.toString();
-    }
+		return result.toString();
+	}
 }

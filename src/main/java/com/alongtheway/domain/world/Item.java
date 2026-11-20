@@ -105,7 +105,6 @@ public class Item {
 	 */
 	private boolean matchesName(String query, String source) {
 		String tSource = TextUtils.normalize(source);
-		return !tSource.isBlank()
-			&& (tSource.contains(query) || query.contains(tSource));
+		return !tSource.isBlank() && (tSource.contains(query) || query.contains(tSource));
 	}
 }

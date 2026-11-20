@@ -16,4 +16,12 @@ public abstract class MessageConstants {
 	public static final String TALK_RESPONSE_WITH_TOPIC = "%s share about %s.";
 	public static final String TALK_RESPONSE_WITH_TOPIC_NO_CHARACTER = "You asked about %s.";
 
+	public static final String USE_TARGET_REQUIRED = "What would you like to use?";
+	public static final String USE_ITEM_NOT_FOUND = "You are not carrying anything by that name.";
+	public static final String USE_RESPONSE = "You use the %s.";
+
+	public static final String HELP_TARGET_REQUIRED = "Who would you like to help?";
+	public static final String HELP_CHARACTER_NOT_FOUND = "No one here goes by that name.";
+	public static final String HELP_RESPONSE = "You offer to help %s.";
+
 }

@@ -58,7 +58,6 @@ class TalkActionTest {
 		);
 	}
 
-
 	@Test
 	void testAskAboutTopic() {
 		factory.create(parser.parse("ask Ada about the journal")).execute(session);
@@ -80,7 +79,6 @@ class TalkActionTest {
 			session.takeMessage()
 		);
 	}
-
 
 	@Test
 	void testAskNoTopic() {

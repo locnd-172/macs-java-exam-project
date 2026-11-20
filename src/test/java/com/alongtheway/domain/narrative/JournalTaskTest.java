@@ -1,4 +1,3 @@
-
 package com.alongtheway.domain.narrative;
 
 import java.util.List;
@@ -13,139 +12,127 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class JournalTaskTest {
 
-    private Journal journal;
-    private JournalEntry cafeEntry;
-    private JournalEntry gardenerEntry;
+	private Journal journal;
+	private JournalEntry cafeEntry;
+	private JournalEntry gardenerEntry;
 
-    /**
-     * Creates the objects needed for each test.
-     */
-    @BeforeEach
-    void setUp() {
+	/**
+	 * Creates the objects needed for each test.
+	 */
+	@BeforeEach
+	void setUp() {
 
-        journal = new Journal();
+		journal = new Journal();
 
-        cafeEntry = new JournalEntry(
-                "Café Owner",
-                "Sometimes a small conversation can change someone's day."
-        );
+		cafeEntry = new JournalEntry("Café Owner", "Sometimes a small conversation can change someone's day.");
 
-        gardenerEntry = new JournalEntry(
-                "Gardener",
-                "Taking care of something requires patience."
-        );
-    }
+		gardenerEntry = new JournalEntry("Gardener", "Taking care of something requires patience.");
+	}
 
-    @Test
-    void newJournalIsEmpty() {
+	@Test
+	void newJournalIsEmpty() {
 
-        assertTrue(journal.isEmpty());
-        assertEquals(0, journal.size());
-    }
+		assertTrue(journal.isEmpty());
+		assertEquals(0, journal.size());
+	}
 
-    @Test
-    void journalEntryStoresAuthorCorrectly() {
+	@Test
+	void journalEntryStoresAuthorCorrectly() {
 
-        assertEquals("Café Owner", cafeEntry.getAuthor());
-    }
+		assertEquals("Café Owner", cafeEntry.getAuthor());
+	}
 
-    @Test
-    void journalEntryStoresContentCorrectly() {
+	@Test
+	void journalEntryStoresContentCorrectly() {
 
-        assertEquals(
-                "Sometimes a small conversation can change someone's day.",
-                cafeEntry.getContent()
-        );
-    }
+		assertEquals("Sometimes a small conversation can change someone's day.", cafeEntry.getContent());
+	}
 
-    @Test
-    void journalEntryHasCorrectStringRepresentation() {
+	@Test
+	void journalEntryHasCorrectStringRepresentation() {
 
-        String result = cafeEntry.toString();
+		String result = cafeEntry.toString();
 
-        assertTrue(result.contains("Café Owner"));
-        assertTrue(result.contains("Sometimes a small conversation can change someone's day."));
-    }
+		assertTrue(result.contains("Café Owner"));
+		assertTrue(result.contains("Sometimes a small conversation can change someone's day."));
+	}
 
-    @Test
-    void journalCanAddAnEntry() {
+	@Test
+	void journalCanAddAnEntry() {
 
-        journal.addEntry(cafeEntry);
+		journal.addEntry(cafeEntry);
 
-        assertEquals(1, journal.size());
-        assertFalse(journal.isEmpty());
-    }
+		assertEquals(1, journal.size());
+		assertFalse(journal.isEmpty());
+	}
 
-    @Test
-    void journalCanAddMultipleEntries() {
+	@Test
+	void journalCanAddMultipleEntries() {
 
-        journal.addEntry(cafeEntry);
-        journal.addEntry(gardenerEntry);
+		journal.addEntry(cafeEntry);
+		journal.addEntry(gardenerEntry);
 
-        assertEquals(2, journal.size());
-    }
+		assertEquals(2, journal.size());
+	}
 
-    @Test
-    void journalCanRetrieveAddedEntries() {
+	@Test
+	void journalCanRetrieveAddedEntries() {
 
-        journal.addEntry(cafeEntry);
-        journal.addEntry(gardenerEntry);
+		journal.addEntry(cafeEntry);
+		journal.addEntry(gardenerEntry);
 
-        List<JournalEntry> entries = journal.listEntries();
+		List<JournalEntry> entries = journal.listEntries();
 
-        assertEquals(2, entries.size());
-        assertSame(cafeEntry, entries.get(0));
-        assertSame(gardenerEntry, entries.get(1));
-    }
+		assertEquals(2, entries.size());
+		assertSame(cafeEntry, entries.get(0));
+		assertSame(gardenerEntry, entries.get(1));
+	}
 
-    @Test
-    void journalIgnoresNullEntries() {
+	@Test
+	void journalIgnoresNullEntries() {
 
-        journal.addEntry(null);
+		journal.addEntry(null);
 
-        assertTrue(journal.isEmpty());
-        assertEquals(0, journal.size());
-    }
+		assertTrue(journal.isEmpty());
+		assertEquals(0, journal.size());
+	}
 
-    @Test
-    void journalDisplaysEmptyMessageWhenThereAreNoEntries() {
+	@Test
+	void journalDisplaysEmptyMessageWhenThereAreNoEntries() {
 
-        assertEquals(
-                "Your journal is empty.",
-                journal.toDisplayString()
-        );
-    }
+		assertEquals("Your journal is empty.", journal.toDisplayString());
+	}
 
-    @Test
-    void journalDisplaysAllEntries() {
+	@Test
+	void journalDisplaysAllEntries() {
 
-        journal.addEntry(cafeEntry);
-        journal.addEntry(gardenerEntry);
+		journal.addEntry(cafeEntry);
+		journal.addEntry(gardenerEntry);
 
-        String result = journal.toDisplayString();
+		String result = journal.toDisplayString();
 
-        assertTrue(result.contains("===== YOUR JOURNAL ====="));
+		assertTrue(result.contains("===== YOUR JOURNAL ====="));
 
-        assertTrue(result.contains("Entry 1"));
-        assertTrue(result.contains("Café Owner"));
-        assertTrue(result.contains("Sometimes a small conversation can change someone's day."));
+		assertTrue(result.contains("Entry 1"));
+		assertTrue(result.contains("Café Owner"));
+		assertTrue(result.contains("Sometimes a small conversation can change someone's day."));
 
-        assertTrue(result.contains("Entry 2"));
-        assertTrue(result.contains("Gardener"));
-        assertTrue(result.contains("Taking care of something requires patience."));
-    }
+		assertTrue(result.contains("Entry 2"));
+		assertTrue(result.contains("Gardener"));
+		assertTrue(result.contains("Taking care of something requires patience."));
+	}
 
-    @Test
-    void listEntriesReturnsSeparateList() {
+	@Test
+	void listEntriesReturnsSeparateList() {
 
-        journal.addEntry(cafeEntry);
+		journal.addEntry(cafeEntry);
 
-        List<JournalEntry> entries = journal.listEntries();
+		List<JournalEntry> entries = journal.listEntries();
 
-        entries.clear();
+		entries.clear();
 
-        // Clearing the returned list should not clear the journal.
-        assertEquals(1, journal.size());
-        assertFalse(journal.isEmpty());
-    }
+		// Clearing the returned list should not clear the journal.
+		assertEquals(1, journal.size());
+		assertFalse(journal.isEmpty());
+	}
 }
