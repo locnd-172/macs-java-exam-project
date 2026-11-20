@@ -17,9 +17,9 @@ public class Character {
 	/**
 	 * Creates a character.
 	 *
-	 * @param name the character's name
+	 * @param name        the character's name
 	 * @param description the character's description
-	 * @param aliases alternate names used to identify the character
+	 * @param aliases     alternate names used to identify the character
 	 */
 	public Character(String name, String description, List<String> aliases) {
 		this.characterId = UUID.randomUUID();
@@ -83,7 +83,7 @@ public class Character {
 	/**
 	 * Normalizes both values and matches them at whole word level.
 	 *
-	 * @param query the text entered by the player
+	 * @param query  the text entered by the player
 	 * @param source the name or alias being checked
 	 * @return true if either value contains the other as complete words
 	 */

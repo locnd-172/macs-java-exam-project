@@ -21,9 +21,8 @@ public class World {
 	}
 
 	public void addLocations(List<Location> locations) {
-		if (locations == null || locations.isEmpty()) {
-			return;
-		}
+		if (locations == null || locations.isEmpty()) return;
+
 		for (Location location : locations) {
 			addLocation(location);
 		}

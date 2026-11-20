@@ -56,8 +56,9 @@ public class Location {
 	 * @param character the character to add
 	 */
 	public void addCharacter(Character character) {
-		if (character != null && !characters.contains(character))
+		if (character != null && !characters.contains(character)) {
 			this.characters.add(character);
+		}
 	}
 
 	/**
@@ -81,8 +82,9 @@ public class Location {
 	 * @param item the item to add
 	 */
 	public void addItem(Item item) {
-		if (item != null && !items.contains(item))
+		if (item != null && !items.contains(item)) {
 			this.items.add(item);
+		}
 	}
 
 	/**
@@ -104,8 +106,9 @@ public class Location {
 	 * @param adjacency the location to link from this location
 	 */
 	public void addLink(Location adjacency) {
-		if (adjacency != null && adjacency != this && !links.contains(adjacency))
+		if (adjacency != null && adjacency != this && !links.contains(adjacency)) {
 			this.links.add(adjacency);
+		}
 	}
 
 	/**
@@ -167,7 +170,6 @@ public class Location {
 
 	private boolean matchesText(String query, String source) {
 		String tSource = TextUtils.normalize(source);
-		return !tSource.isBlank()
-			&& (tSource.contains(query) || query.contains(tSource));
+		return !tSource.isBlank() && (tSource.contains(query) || query.contains(tSource));
 	}
 }

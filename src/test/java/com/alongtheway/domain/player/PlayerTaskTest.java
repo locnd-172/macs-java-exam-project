@@ -1,4 +1,3 @@
-
 package com.alongtheway.domain.player;
 
 import java.util.Arrays;
@@ -17,107 +16,85 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 class PlayerTaskTest {
 
-    private Location cottage;
-    private Location cafe;
-    private Journal journal;
-    private Player player;
-    private Item key;
+	private Location cottage;
+	private Location cafe;
+	private Journal journal;
+	private Player player;
+	private Item key;
 
-    /**
-     * Creates the objects needed for each test.
-     */
-    @BeforeEach
-    void setUp() {
+	/**
+	 * Creates the objects needed for each test.
+	 */
+	@BeforeEach
+	void setUp() {
+		cottage = new Location("cottage", "Cottage", "A small cottage in the village.", Arrays.asList("home"));
+		cafe = new Location("cafe", "Little Corner Cafe", "A small cafe in the village.", Arrays.asList("coffee shop"));
 
-        cottage = new Location(
-                "cottage",
-                "Cottage",
-                "A small cottage in the village.",
-                Arrays.asList("home")
-        );
+		journal = new Journal();
+		player = new Player("player_01", "Test Player", cottage, journal);
+		key = new Item("Old Key", Arrays.asList("rusty key", "small key"));
 
-        cafe = new Location(
-                "cafe",
-                "Little Corner Cafe",
-                "A small cafe in the village.",
-                Arrays.asList("coffee shop")
-        );
+		key.setDescription("An old rusty key.");
+	}
 
-        journal = new Journal();
+	@Test
+	void playerHasCorrectStartingLocation() {
+		assertSame(cottage, player.getLocation());
+	}
 
-        player = new Player(
-                "player_01",
-                "Test Player",
-                cottage,
-                journal
-        );
+	@Test
+	void playerLocationCanBeUpdated() {
+		player.setLocation(cafe);
 
-        key = new Item(
-                "Old Key",
-                Arrays.asList("rusty key", "small key")
-        );
+		assertSame(cafe, player.getLocation());
+	}
 
-        key.setDescription("An old rusty key.");
-    }
+	@Test
+	void playerHasJournal() {
+		assertSame(journal, player.getJournal());
+	}
 
-    @Test
-    void playerHasCorrectStartingLocation() {
-        assertSame(cottage, player.getLocation());
-    }
+	@Test
+	void itemStoresNameAndDescriptionCorrectly() {
+		assertEquals("Old Key", key.getName());
+		assertEquals("An old rusty key.", key.getDescription());
+		assertEquals("An old rusty key.", key.examine());
+	}
 
-    @Test
-    void playerLocationCanBeUpdated() {
-        player.setLocation(cafe);
+	@Test
+	void itemCanBeFoundUsingAlias() {
+		assertTrue(key.matches("rusty key"));
+	}
 
-        assertSame(cafe, player.getLocation());
-    }
+	@Test
+	void itemMatchingIgnoresCase() {
+		assertTrue(key.matches("OLD KEY"));
+	}
 
-    @Test
-    void playerHasJournal() {
-        assertSame(journal, player.getJournal());
-    }
+	@Test
+	void playerCanTakeAnItem() {
+		assertTrue(player.takeItem(key));
+	}
 
-    @Test
-    void itemStoresNameAndDescriptionCorrectly() {
-        assertEquals("Old Key", key.getName());
-        assertEquals("An old rusty key.", key.getDescription());
-        assertEquals("An old rusty key.", key.examine());
-    }
+	@Test
+	void inventoryContainsAddedItem() {
+		player.takeItem(key);
 
-    @Test
-    void itemCanBeFoundUsingAlias() {
-        assertTrue(key.matches("rusty key"));
-    }
+		assertTrue(player.getInventory().contains(key));
+	}
 
-    @Test
-    void itemMatchingIgnoresCase() {
-        assertTrue(key.matches("OLD KEY"));
-    }
+	@Test
+	void inventoryHasCorrectNumberOfItems() {
+		player.takeItem(key);
 
-    @Test
-    void playerCanTakeAnItem() {
-        assertTrue(player.takeItem(key));
-    }
+		assertEquals(1, player.getInventory().size());
+	}
 
-    @Test
-    void inventoryContainsAddedItem() {
-        player.takeItem(key);
+	@Test
+	void inventoryRejectsDuplicateItems() {
+		player.takeItem(key);
 
-        assertTrue(player.getInventory().contains(key));
-    }
-
-    @Test
-    void inventoryHasCorrectNumberOfItems() {
-        player.takeItem(key);
-
-        assertEquals(1, player.getInventory().size());
-    }
-
-    @Test
-    void inventoryRejectsDuplicateItems() {
-        player.takeItem(key);
-
-        assertFalse(player.takeItem(key));
-        assertEquals(1, player.getInventory().size());
-    }
+		assertFalse(player.takeItem(key));
+		assertEquals(1, player.getInventory().size());
+	}
 }
