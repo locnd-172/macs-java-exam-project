@@ -13,8 +13,8 @@ class ItemTest {
 	@Test
 	void testNameMatch() {
 		Item item = new Item("Old photograph", List.of("picture", "photo"));
-		assertTrue(item.matches("old photograph"));
-		assertTrue(item.matches("photograph"));
+		assertTrue(item.match("old photograph"));
+		assertTrue(item.match("photograph"));
 	}
 
 	@Test
@@ -23,18 +23,26 @@ class ItemTest {
 			"Old photograph",
 			List.of("Picture", "PHOTO", "Family-Snapshot")
 		);
-		assertTrue(item.matches("PHOTO"));
-		assertTrue(item.matches("FAMILY SNAPSHOT"));
-		assertTrue(item.matches("picture"));
-		assertFalse(item.matches("keepsake"));
+		assertTrue(item.match("PHOTO"));
+		assertTrue(item.match("FAMILY SNAPSHOT"));
+		assertTrue(item.match("picture"));
+		assertFalse(item.match("keepsake"));
 	}
 
 	@Test
 	void testInvalidQuery() {
 		Item item = new Item("Old photograph", List.of("picture"));
-		assertFalse(item.matches(" "));
-		assertFalse(item.matches("!!!"));
-		assertFalse(item.matches("journal"));
+		assertFalse(item.match(" "));
+		assertFalse(item.match("!!!"));
+		assertFalse(item.match("journal"));
+	}
+
+	@Test
+	void testWholeWordMatch() {
+		Item item = new Item("old book", List.of("book", "novel"));
+
+		assertTrue(item.match("read the book"));
+		assertFalse(item.match("notebook"));
 	}
 
 	@Test

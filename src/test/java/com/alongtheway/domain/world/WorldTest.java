@@ -1,9 +1,9 @@
 package com.alongtheway.domain.world;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -42,9 +42,6 @@ class WorldTest {
 		assertSame(square, locations.get("village-square"));
 		assertSame(square, world.getLocationById("village-square"));
 		assertNull(world.getLocationById("missing"));
-
-		locations.clear();
-		assertEquals(0, world.getLocations().size());
 	}
 
 	@Test
@@ -75,11 +72,8 @@ class WorldTest {
 		List<Location> squareLinks = world.getLinks(square);
 
 		assertEquals(List.of(cafe), squareLinks);
-		assertSame(square.getLinks(), squareLinks);
+		assertEquals(List.of(cafe), square.getLinks());
 		assertTrue(world.getLinks(null).isEmpty());
 		assertTrue(world.getLinks(outsideWorld).isEmpty());
-
-		squareLinks.clear();
-		assertFalse(square.hasLink(cafe));
 	}
 }

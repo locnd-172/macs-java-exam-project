@@ -8,10 +8,10 @@ public class CommandParser {
 
 	/**
 	 * Extract the command verb and target from the player's input.
-     * If the input is null or blank, returns NULL.
+	 * If the input is null or blank, returns null.
 	 *
 	 * @param input the player's command
-	 * @return the parsed command, or NULL if input is null or blank
+	 * @return the parsed command, or null if input is null or blank
 	 */
 	public Command parse(String input) {
 		if (input == null || input.isBlank()) return null;

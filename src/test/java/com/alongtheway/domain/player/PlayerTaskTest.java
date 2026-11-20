@@ -63,12 +63,12 @@ class PlayerTaskTest {
 
 	@Test
 	void itemCanBeFoundUsingAlias() {
-		assertTrue(key.matches("rusty key"));
+		assertTrue(key.match("rusty key"));
 	}
 
 	@Test
 	void itemMatchingIgnoresCase() {
-		assertTrue(key.matches("OLD KEY"));
+		assertTrue(key.match("OLD KEY"));
 	}
 
 	@Test

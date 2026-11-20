@@ -60,7 +60,7 @@ public class Location {
 	}
 
 	/**
-	 * Adds a character unless it is NULL or already attached to this location.
+	 * Adds a character unless it is null or already attached to this location.
 	 *
 	 * @param character the character to add
 	 */
@@ -77,16 +77,14 @@ public class Location {
 	 * @return the matching character
 	 */
 	public Character findCharacter(String query) {
-		for (Character character : this.characters) {
-			if (character.find(query)) {
-				return character;
-			}
-		}
-		return null;
+		return characters.stream()
+		                 .filter(character -> character.match(query))
+		                 .findFirst()
+		                 .orElse(null);
 	}
 
 	/**
-	 * Adds an item unless it is NULL or already attached to this location.
+	 * Adds an item unless it is null or already attached to this location.
 	 *
 	 * @param item the item to add
 	 */
@@ -103,10 +101,10 @@ public class Location {
 	 * @return the matching item
 	 */
 	public Item findItem(String name) {
-		for (Item item : items) {
-			if (item.matches(name)) return item;
-		}
-		return null;
+		return items.stream()
+		            .filter(item -> item.match(name))
+		            .findFirst()
+		            .orElse(null);
 	}
 
 	/**
@@ -126,6 +124,9 @@ public class Location {
 	 * @param adjacencies the locations to link from this location
 	 */
 	public void addLinks(List<Location> adjacencies) {
+		if (adjacencies == null) {
+			return;
+		}
 		for (Location adjacency : adjacencies) {
 			this.addLink(adjacency);
 		}
@@ -141,12 +142,12 @@ public class Location {
 	}
 
 	/**
-	 * Returns the list of locations linked from this location.
+	 * Returns a copy of the locations linked from this location.
 	 *
-	 * @return this location's outgoing links
+	 * @return an unmodifiable list of outgoing links
 	 */
 	public List<Location> getLinks() {
-		return this.links;
+		return List.copyOf(links);
 	}
 
 	/**
@@ -166,19 +167,9 @@ public class Location {
 	 * @return true if the name or an alias matches
 	 */
 	public boolean match(String query) {
-		String tQuery = TextUtils.normalize(query);
-		if (tQuery.isBlank()) return false;
-
-		if (matchesText(tQuery, this.name)) return true;
-
-		for (String alias : aliases) {
-			if (matchesText(tQuery, alias)) return true;
-		}
-		return false;
-	}
-
-	private boolean matchesText(String query, String source) {
-		String tSource = TextUtils.normalize(source);
-		return !tSource.isBlank() && (tSource.contains(query) || query.contains(tSource));
+		List<String> candidates = new ArrayList<>();
+		candidates.add(name);
+		candidates.addAll(aliases);
+		return TextUtils.match(query, candidates);
 	}
 }

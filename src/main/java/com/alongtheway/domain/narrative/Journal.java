@@ -26,7 +26,6 @@ public class Journal {
 	 * @param entry the journal entry to add
 	 */
 	public void addEntry(JournalEntry entry) {
-
 		if (entry != null) {
 			entries.add(entry);
 		}
@@ -65,7 +64,6 @@ public class Journal {
 	 * @return formatted journal contents
 	 */
 	public String toDisplayString() {
-
 		if (entries.isEmpty()) {
 			return GameConstants.Journal.EMPTY_MESSAGE;
 		}
@@ -75,7 +73,6 @@ public class Journal {
 		result.append(GameConstants.Journal.HEADER);
 
 		for (int i = 0; i < entries.size(); i++) {
-
 			result.append(GameConstants.Journal.ENTRY_HEADER).append(i + 1).append("\n");
 			result.append(entries.get(i).toString());
 			result.append("\n");

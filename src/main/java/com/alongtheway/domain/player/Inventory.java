@@ -27,7 +27,6 @@ public class Inventory {
 	 * @return true if the item was added, otherwise false
 	 */
 	public boolean addItem(Item item) {
-
 		if (item == null || contains(item.getItemId())) {
 			return false;
 		}
@@ -43,7 +42,6 @@ public class Inventory {
 	 * @return true if the item was removed, otherwise false
 	 */
 	public boolean removeItem(Item item) {
-
 		if (item == null) {
 			return false;
 		}
@@ -58,15 +56,16 @@ public class Inventory {
 	 * @return removed item, or null if it was not found
 	 */
 	public Item removeItem(UUID itemId) {
+		Item found = items.stream()
+		                  .filter(item -> item.getItemId().equals(itemId))
+		                  .findFirst()
+		                  .orElse(null);
 
-		for (int i = 0; i < items.size(); i++) {
-
-			if (items.get(i).getItemId().equals(itemId)) {
-				return items.remove(i);
-			}
+		if (found != null) {
+			items.remove(found);
 		}
 
-		return null;
+		return found;
 	}
 
 	/**
@@ -76,7 +75,6 @@ public class Inventory {
 	 * @return true if the item exists, otherwise false
 	 */
 	public boolean contains(Item item) {
-
 		if (item == null) {
 			return false;
 		}
@@ -88,16 +86,13 @@ public class Inventory {
 	 * Finds an inventory item by name or alias.
 	 *
 	 * @param query the name or alias to search
-	 * @return the matching item, or NULL when no item matches
+	 * @return the matching item, or null when no item matches
 	 */
 	public Item findItem(String query) {
-		for (Item item : items) {
-			if (item.matches(query)) {
-				return item;
-			}
-		}
-
-		return null;
+		return items.stream()
+		            .filter(item -> item.match(query))
+		            .findFirst()
+		            .orElse(null);
 	}
 
 	/**
@@ -107,15 +102,8 @@ public class Inventory {
 	 * @return true if the item exists, otherwise false
 	 */
 	public boolean contains(UUID itemId) {
-
-		for (Item item : items) {
-
-			if (item.getItemId().equals(itemId)) {
-				return true;
-			}
-		}
-
-		return false;
+		return items.stream()
+		            .anyMatch(item -> item.getItemId().equals(itemId));
 	}
 
 	/**
