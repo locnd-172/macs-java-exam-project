@@ -25,7 +25,7 @@ public abstract class MessageConstants {
 	public static final String HELP_RESPONSE = "You offer to help %s.";
 
 	public static final String EXAMINE_TARGET_REQUIRED = "What do you want to check?";
-	public static final String EXAMINE_ITEM_NOT_FOUND = "There's no such item here!";
-	public static final String EXAMINE_RESPONSE = "You are examining %s.";
+	public static final String EXAMINE_TARGET_NOT_FOUND = "There's no such item here!";
+	public static final String EXAMINE_DESCRIPTION_UNAVAILABLE = "There is nothing more to notice!";
 
 }
