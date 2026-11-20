@@ -92,10 +92,7 @@ public class Item {
 		String tQuery = TextUtils.normalize(query);
 		if (tQuery.isBlank()) return false;
 		if (matchesName(tQuery, name)) return true;
-		for (String alias : this.aliases) {
-			if (matchesName(tQuery, alias)) return true;
-		}
-		return false;
+		return aliases.stream().anyMatch(alias -> matchesName(tQuery, alias));
 	}
 
 	/**

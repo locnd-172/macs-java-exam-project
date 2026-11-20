@@ -74,10 +74,7 @@ public class Character {
 	 * @return {@code true} if any alias matches
 	 */
 	private boolean matchesAlias(String query) {
-		for (String alias : aliases) {
-			if (match(query, alias)) return true;
-		}
-		return false;
+		return aliases.stream().anyMatch(alias -> match(query, alias));
 	}
 
 	/**

@@ -58,15 +58,16 @@ public class Inventory {
 	 * @return removed item, or null if it was not found
 	 */
 	public Item removeItem(UUID itemId) {
+		Item found = items.stream()
+		                  .filter(item -> item.getItemId().equals(itemId))
+		                  .findFirst()
+		                  .orElse(null);
 
-		for (int i = 0; i < items.size(); i++) {
-
-			if (items.get(i).getItemId().equals(itemId)) {
-				return items.remove(i);
-			}
+		if (found != null) {
+			items.remove(found);
 		}
 
-		return null;
+		return found;
 	}
 
 	/**
@@ -91,13 +92,10 @@ public class Inventory {
 	 * @return the matching item, or NULL when no item matches
 	 */
 	public Item findItem(String query) {
-		for (Item item : items) {
-			if (item.matches(query)) {
-				return item;
-			}
-		}
-
-		return null;
+		return items.stream()
+		            .filter(item -> item.matches(query))
+		            .findFirst()
+		            .orElse(null);
 	}
 
 	/**
@@ -107,15 +105,8 @@ public class Inventory {
 	 * @return true if the item exists, otherwise false
 	 */
 	public boolean contains(UUID itemId) {
-
-		for (Item item : items) {
-
-			if (item.getItemId().equals(itemId)) {
-				return true;
-			}
-		}
-
-		return false;
+		return items.stream()
+		            .anyMatch(item -> item.getItemId().equals(itemId));
 	}
 
 	/**

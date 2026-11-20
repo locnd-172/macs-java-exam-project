@@ -77,12 +77,10 @@ public class Location {
 	 * @return the matching character
 	 */
 	public Character findCharacter(String query) {
-		for (Character character : this.characters) {
-			if (character.find(query)) {
-				return character;
-			}
-		}
-		return null;
+		return characters.stream()
+		                 .filter(character -> character.find(query))
+		                 .findFirst()
+		                 .orElse(null);
 	}
 
 	/**
@@ -103,10 +101,10 @@ public class Location {
 	 * @return the matching item
 	 */
 	public Item findItem(String name) {
-		for (Item item : items) {
-			if (item.matches(name)) return item;
-		}
-		return null;
+		return items.stream()
+		            .filter(item -> item.matches(name))
+		            .findFirst()
+		            .orElse(null);
 	}
 
 	/**
@@ -171,10 +169,7 @@ public class Location {
 
 		if (matchesText(tQuery, this.name)) return true;
 
-		for (String alias : aliases) {
-			if (matchesText(tQuery, alias)) return true;
-		}
-		return false;
+		return aliases.stream().anyMatch(alias -> matchesText(tQuery, alias));
 	}
 
 	private boolean matchesText(String query, String source) {

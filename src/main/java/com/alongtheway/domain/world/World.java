@@ -87,11 +87,10 @@ public class World {
 	 * @return the matching location, or null if none matches
 	 */
 	public Location findLocation(String query) {
-		for (Location location : locations.values()) {
-			if (location.match(query)) {
-				return location;
-			}
-		}
-		return null;
+		return locations.values()
+		                .stream()
+		                .filter(location -> location.match(query))
+		                .findFirst()
+		                .orElse(null);
 	}
 }
