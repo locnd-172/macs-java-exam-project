@@ -2,7 +2,9 @@ package com.alongtheway.domain.world;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
+import com.alongtheway.config.GameConstants;
 import com.alongtheway.util.TextUtils;
 
 public class Item {
@@ -80,7 +82,7 @@ public class Item {
 	}
 
 	/**
-	 * Checks whether the query partially matches the item's name or an alias,
+	 * Matches the query against the item's name or aliases at word level,
 	 * ignoring case and normalized punctuation and whitespace.
 	 *
 	 * @param query the text to match
@@ -105,6 +107,14 @@ public class Item {
 	 */
 	private boolean matchesName(String query, String source) {
 		String tSource = TextUtils.normalize(source);
-		return !tSource.isBlank() && (tSource.contains(query) || query.contains(tSource));
+		if (tSource.isBlank()) return false;
+
+		return containsWords(query, tSource) || containsWords(tSource, query);
+	}
+
+	private boolean containsWords(String text, String words) {
+		String boundary = GameConstants.Text.WORD_BOUNDARY_REGEX;
+		String pattern = boundary + Pattern.quote(words) + boundary;
+		return Pattern.compile(pattern).matcher(text).find();
 	}
 }

@@ -51,6 +51,15 @@ public class Location {
 	}
 
 	/**
+	 * Returns the location's description.
+	 *
+	 * @return the location's description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
 	 * Adds a character unless it is NULL or already attached to this location.
 	 *
 	 * @param character the character to add
