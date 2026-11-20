@@ -24,7 +24,9 @@ public class Character {
 		this.characterId = UUID.randomUUID();
 		this.name = name;
 		this.description = description;
-		if (aliases != null) this.aliases = aliases;
+		if (aliases != null) {
+			this.aliases.addAll(aliases);
+		}
 	}
 
 	/**

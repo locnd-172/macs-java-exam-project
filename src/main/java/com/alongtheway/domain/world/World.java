@@ -1,6 +1,5 @@
 package com.alongtheway.domain.world;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,13 +28,12 @@ public class World {
 	}
 
 	/**
-	 * Returns this world's mutable map of locations by ID.
-	 * Changes to the returned map directly affect this world.
+	 * Returns a copy of this world's locations by ID.
 	 *
-	 * @return this world's location map
+	 * @return an unmodifiable map of locations
 	 */
 	public Map<String, Location> getLocations() {
-		return this.locations;
+		return Map.copyOf(locations);
 	}
 
 	/**
@@ -67,15 +65,15 @@ public class World {
 	}
 
 	/**
-	 * Returns the mutable link list for a location in this world.
-	 * Returns a new empty list when the argument is {@code null} or is not in this world.
+	 * Returns a copy of the links for a location in this world.
+	 * Returns an empty list when the argument is null or is not in this world.
 	 *
 	 * @param location the location whose links should be queried
-	 * @return the location's internal link list, or an empty list
+	 * @return an unmodifiable list of links, or an empty list
 	 */
 	public List<Location> getLinks(Location location) {
 		if (location == null || locations.get(location.getLocationId()) != location) {
-			return new ArrayList<>();
+			return List.of();
 		}
 		return location.getLinks();
 	}

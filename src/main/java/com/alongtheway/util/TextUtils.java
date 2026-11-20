@@ -24,11 +24,10 @@ public final class TextUtils {
 		if (value == null) {
 			return GameConstants.Text.EMPTY;
 		}
-		return value
-			.toLowerCase()
-			.replaceAll(GameConstants.Text.NORMALIZE_FILTER_REGEX, GameConstants.Text.SPACE)
-			.trim()
-			.replaceAll(GameConstants.Text.WHITESPACE_REGEX, GameConstants.Text.SPACE);
+		return value.toLowerCase()
+		            .replaceAll(GameConstants.Text.NORMALIZE_FILTER_REGEX, GameConstants.Text.SPACE)
+		            .trim()
+		            .replaceAll(GameConstants.Text.WHITESPACE_REGEX, GameConstants.Text.SPACE);
 	}
 
 	/**

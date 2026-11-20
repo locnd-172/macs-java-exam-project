@@ -124,6 +124,9 @@ public class Location {
 	 * @param adjacencies the locations to link from this location
 	 */
 	public void addLinks(List<Location> adjacencies) {
+		if (adjacencies == null) {
+			return;
+		}
 		for (Location adjacency : adjacencies) {
 			this.addLink(adjacency);
 		}
@@ -139,12 +142,12 @@ public class Location {
 	}
 
 	/**
-	 * Returns the list of locations linked from this location.
+	 * Returns a copy of the locations linked from this location.
 	 *
-	 * @return this location's outgoing links
+	 * @return an unmodifiable list of outgoing links
 	 */
 	public List<Location> getLinks() {
-		return this.links;
+		return List.copyOf(links);
 	}
 
 	/**
