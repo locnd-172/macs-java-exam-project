@@ -43,4 +43,8 @@ public abstract class CommandConstants {
 		"journal", "review"
 	);
 
+	public static final Set<String> QUIT_TOKENS = Set.of(
+		"quit", "exit", "stop"
+	);
+
 }
