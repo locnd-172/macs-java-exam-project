@@ -39,4 +39,8 @@ public abstract class CommandConstants {
 		"take", "get", "pick", "pickup", "collect"
 	);
 
+	public static final Set<String> JOURNAL_TOKENS = Set.of(
+		"journal", "review"
+	);
+
 }

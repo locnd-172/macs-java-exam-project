@@ -7,6 +7,7 @@ import com.alongtheway.action.impl.MoveAction;
 import com.alongtheway.action.impl.TakeAction;
 import com.alongtheway.action.impl.TalkAction;
 import com.alongtheway.action.impl.UseAction;
+import com.alongtheway.action.impl.JournalAction;
 import com.alongtheway.parser.Command;
 
 public class ActionFactory {
@@ -30,6 +31,7 @@ public class ActionFactory {
 			case TALK -> new TalkAction(command);
 			case USE -> new UseAction(command);
 			case HELP -> new HelpAction(command);
+			case JOURNAL -> new JournalAction(command);
 			default -> null;
 		};
 	}
