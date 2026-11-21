@@ -5,6 +5,7 @@ import com.alongtheway.config.GameConstants;
 public enum CommandVerb {
 	MOVE,
 	EXAMINE,
+	TAKE,
 	DROP,
 	TALK,
 	USE,
@@ -21,6 +22,7 @@ public enum CommandVerb {
 		if (token == null) return UNKNOWN;
 		if (GameConstants.Commands.MOVE_TOKENS.contains(token)) return MOVE;
 		if (GameConstants.Commands.EXAMINE_TOKENS.contains(token)) return EXAMINE;
+		if (GameConstants.Commands.TAKE_TOKENS.contains(token)) return TAKE;
 		if (GameConstants.Commands.DROP_TOKENS.contains(token)) return DROP;
 		if (GameConstants.Commands.TALK_TOKENS.contains(token)) return TALK;
 		if (GameConstants.Commands.USE_TOKENS.contains(token)) return USE;

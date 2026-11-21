@@ -35,4 +35,8 @@ public abstract class CommandConstants {
 		"help", "offer"
 	);
 
+	public static final Set<String> TAKE_TOKENS = Set.of(
+		"take", "get", "pick", "pickup", "collect"
+	);
+
 }

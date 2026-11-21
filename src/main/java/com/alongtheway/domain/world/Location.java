@@ -95,6 +95,20 @@ public class Location {
 	}
 
 	/**
+	 * Removes an item from this location.
+	 *
+	 * @param item the item to remove
+	 * @return true if the item was removed, otherwise false
+	 */
+	public boolean removeItem(Item item) {
+		if (item == null) {
+			return false;
+		}
+
+		return items.remove(item);
+	}
+
+	/**
 	 * Finds the first attached item whose name or alias matches the query.
 	 *
 	 * @param name the item name or alias to search for
