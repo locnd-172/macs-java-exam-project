@@ -28,4 +28,12 @@ public abstract class MessageConstants {
 	public static final String EXAMINE_TARGET_NOT_FOUND = "There's no such item here!";
 	public static final String EXAMINE_DESCRIPTION_UNAVAILABLE = "There is nothing more to notice!";
 
+	public static final String TAKE_TARGET_REQUIRED = "What would you like to pick up?";
+	public static final String TAKE_ITEM_NOT_FOUND = "There is no such item here.";
+	public static final String TAKE_SUCCESS = "You picked up the %s.";
+
+	public static final String DROP_TARGET_REQUIRED = "What would you like to drop?";
+	public static final String DROP_ITEM_NOT_FOUND = "You are not carrying anything by that name.";
+	public static final String DROP_SUCCESS = "You dropped the %s.";
+
 }
