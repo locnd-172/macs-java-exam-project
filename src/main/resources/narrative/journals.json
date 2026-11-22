@@ -1,0 +1,17 @@
+[
+  {
+    "itemId": "old-journal",
+    "author": "Liam",
+    "content": "journal content"
+  },
+  {
+    "itemId": "old-photograph",
+    "author": "Emma",
+    "content": "photo content"
+  },
+  {
+    "itemId": "old-book",
+    "author": "Anh",
+    "content": "book content"
+  }
+]

@@ -8,35 +8,45 @@ import com.alongtheway.util.TextUtils;
 
 public class Item {
 
-	private final UUID itemId;
+	private final String itemId;
 	private String name;
 	private String description;
 	private List<String> aliases = new ArrayList<>();
 
 	/**
-	 * Creates an item.
+	 * Creates an item with UUID as item's ID.
 	 *
 	 * @param name    the item's name
 	 * @param aliases alternate names used to identify the item
 	 */
 	public Item(String name, List<String> aliases) {
-		this.itemId = UUID.randomUUID();
+		this(UUID.randomUUID().toString(), name, aliases);
+	}
+
+	/**
+	 * Creates an item.
+	 *
+	 * @param itemId  the item's ID
+	 * @param name    the item's name
+	 * @param aliases alternate names used to identify the item
+	 */
+	public Item(String itemId, String name, List<String> aliases) {
+		this.itemId = itemId;
 		this.name = name;
 		if (aliases != null) this.aliases.addAll(aliases);
 	}
 
 	/**
-	 * Returns the unique ID of the item.
+	 * Gets the item's ID.
 	 *
 	 * @return the item's ID
 	 */
-	public UUID getItemId() {
+	public String getItemId() {
 		return itemId;
 	}
 
-
 	/**
-	 * Returns the item's description for examination.
+	 * Gets the item's description.
 	 *
 	 * @return the description, or null if none has been assigned
 	 */
@@ -45,7 +55,7 @@ public class Item {
 	}
 
 	/**
-	 * Returns the item's display name.
+	 * Gets the item's name.
 	 *
 	 * @return the item's name
 	 */
@@ -54,7 +64,7 @@ public class Item {
 	}
 
 	/**
-	 * Changes the item's name.
+	 * Sets the item's name.
 	 *
 	 * @param name the new name
 	 */
@@ -63,7 +73,7 @@ public class Item {
 	}
 
 	/**
-	 * Returns the item's current description.
+	 * Gets the item's description.
 	 *
 	 * @return the description, or null if none has been assigned
 	 */
@@ -72,7 +82,7 @@ public class Item {
 	}
 
 	/**
-	 * Changes the item's description.
+	 * Sets the item's description.
 	 *
 	 * @param description the new description
 	 */

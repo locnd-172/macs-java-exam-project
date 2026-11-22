@@ -1,0 +1,29 @@
+[
+  {
+    "name": "The Thoughtful Explorer",
+    "description": "Curious, open-minded, and reflective. You seem to enjoy discovering new experiences and considering different perspectives.",
+    "weights": {
+      "CURIOSITY": 1.0,
+      "OPENNESS": 0.8,
+      "EMPATHY": 0.5
+    }
+  },
+  {
+    "name": "The Independent Wanderer",
+    "description": "Autonomous and self-directed. You seem to value personal freedom and making your own decisions.",
+    "weights": {
+      "INDEPENDENCE": 1.0,
+      "ASSERTIVENESS": 0.7,
+      "OPENNESS": 0.5
+    }
+  },
+  {
+    "name": "The Balanced Seeker",
+    "description": "You seem to value balance between personal needs, relationships, and individual responsibilities.",
+    "weights": {
+      "EMPATHY": 0.8,
+      "SOCIABILITY": 0.7,
+      "INDEPENDENCE": 0.7
+    }
+  }
+]
