@@ -4,7 +4,6 @@ import com.alongtheway.domain.world.Item;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Stores and manages the items held by the player.
@@ -55,7 +54,7 @@ public class Inventory {
 	 * @param itemId ID of the item to remove
 	 * @return removed item, or null if it was not found
 	 */
-	public Item removeItem(UUID itemId) {
+	public Item removeItem(String itemId) {
 		Item found = items.stream()
 		                  .filter(item -> item.getItemId().equals(itemId))
 		                  .findFirst()
@@ -101,7 +100,7 @@ public class Inventory {
 	 * @param itemId ID of the item
 	 * @return true if the item exists, otherwise false
 	 */
-	public boolean contains(UUID itemId) {
+	public boolean contains(String itemId) {
 		return items.stream()
 		            .anyMatch(item -> item.getItemId().equals(itemId));
 	}

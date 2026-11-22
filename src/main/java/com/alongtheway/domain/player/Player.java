@@ -1,7 +1,5 @@
 package com.alongtheway.domain.player;
 
-import java.util.UUID;
-
 import com.alongtheway.domain.world.Item;
 import com.alongtheway.domain.world.Location;
 import com.alongtheway.domain.narrative.Journal;
@@ -102,10 +100,10 @@ public class Player {
 	/**
 	 * Removes an item from the player's inventory.
 	 *
-	 * @param itemId UUID of the item to drop
+	 * @param itemId ID of the item to drop
 	 * @return the dropped item, or null if it was not found
 	 */
-	public Item dropItem(UUID itemId) {
+	public Item dropItem(String itemId) {
 		return inventory.removeItem(itemId);
 	}
 }

@@ -1,0 +1,117 @@
+{
+  "locations": [
+    {
+      "id": "village-entrance",
+      "name": "Village Entrance",
+      "aliases": ["entrance"],
+      "links": ["village-square"],
+      "responses": {
+        "arrival": "Village Entrance - arrival."
+      }
+    },
+    {
+      "id": "village-square",
+      "name": "Village Square",
+      "aliases": ["square"],
+      "links": ["village-entrance", "cafe", "old-bookshop", "garden"],
+      "responses": {
+        "arrival": "Village Square - arrival."
+      },
+      "characters": [
+        {
+          "id": "daniel",
+          "name": "Daniel",
+          "aliases": ["young local", "local"],
+          "responses": {
+            "encounter": "Daniel - encounter.",
+            "default": "Daniel - default.",
+            "future": "Daniel - future."
+          }
+        }
+      ],
+      "items": [
+        {
+          "id": "notice-board",
+          "name": "Notice Board",
+          "aliases": ["board", "notice", "announcement"],
+          "responses": {
+            "examine": "Notice Board - examine."
+          }
+        }
+      ]
+    },
+    {
+      "id": "cafe",
+      "name": "Every Half Café",
+      "aliases": ["cafe", "coffee shop", "every half cafe"],
+      "links": ["village-square"],
+      "responses": {
+        "arrival": "Every Half Café - arrival."
+      },
+      "characters": [
+        {
+          "id": "emma",
+          "name": "Emma",
+          "aliases": ["cafe owner", "coffee shop owner", "owner"],
+          "responses": {
+            "encounter": "Emma - encounter.",
+            "default": "Emma - default.",
+            "journal": "Emma - journal."
+          }
+        }
+      ]
+    },
+    {
+      "id": "old-bookshop",
+      "name": "The Bookshop",
+      "aliases": ["bookshop", "old bookshop", "bookstore"],
+      "links": ["village-square", "garden"],
+      "responses": {
+        "arrival": "The Bookshop - arrival."
+      },
+      "characters": [
+        {
+          "id": "alex",
+          "name": "Alex",
+          "aliases": ["bookseller", "bookshop owner"],
+          "responses": {
+            "encounter": "Alex - encounter.",
+            "default": "Alex - default.",
+            "journal": "Alex - journal."
+          }
+        }
+      ],
+      "items": [
+        {
+          "id": "old-journal",
+          "name": "The Mysterious Journal",
+          "aliases": ["journal", "old journal", "book"],
+          "responses": {
+            "examine": "The Mysterious Journal - examine."
+          }
+        }
+      ]
+    },
+    {
+      "id": "garden",
+      "name": "Green Garden",
+      "aliases": ["garden"],
+      "links": ["village-square", "old-bookshop"],
+      "responses": {
+        "arrival": "Green Garden - arrival."
+      },
+      "characters": [
+        {
+          "id": "liam",
+          "name": "Liam",
+          "aliases": ["gardener", "garden owner"],
+          "responses": {
+            "encounter": "Liam - encounter.",
+            "default": "Liam - default.",
+            "garden": "Liam - garden."
+          }
+        }
+      ]
+    }
+  ]
+}
