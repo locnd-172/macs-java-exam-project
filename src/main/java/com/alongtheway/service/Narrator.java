@@ -31,7 +31,6 @@ public class Narrator {
 	 */
 	public String compose(GameSession session, Character character, Item item, String topic) {
 		Location location = session.getPlayer().getLocation();
-		String scenarioId = session.getScenarioManager().getNarrativeScenarioId(location);
-		return data.message(scenarioId, location, character, item, topic);
+		return data.message(location, character, item, topic);
 	}
 }

@@ -5,7 +5,6 @@ public abstract class ResourceConstants {
 	}
 
 	public static final String WORLD = "/narrative/world.json";
-	public static final String SCENARIOS = "/narrative/scenarios.json";
 	public static final String JOURNALS = "/narrative/journals.json";
 	public static final String ARCHETYPES = "/narrative/archetypes.json";
 }

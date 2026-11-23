@@ -7,7 +7,7 @@ public class AssessmentObservation {
 	private AssessmentDimension dimension;
 	private int value;
 	private double weight;
-	private String scenarioId;
+	private String locationId;
 
 	/**
 	 * Creates an assessment observation.
@@ -15,12 +15,12 @@ public class AssessmentObservation {
 	 * @param dimension  the assessment dimension
 	 * @param value      the observed value
 	 * @param weight     the weight of the observation
-	 * @param scenarioId the scenario it was recorded in
+	 * @param locationId the location it was recorded in
 	 */
-	public AssessmentObservation(AssessmentDimension dimension, int value, double weight, String scenarioId) {
+	public AssessmentObservation(AssessmentDimension dimension, int value, double weight, String locationId) {
 		this.dimension = dimension;
 		this.value = value;
 		this.weight = weight;
-		this.scenarioId = scenarioId;
+		this.locationId = locationId;
 	}
 }

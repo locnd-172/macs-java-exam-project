@@ -34,7 +34,7 @@ public class UseAction implements Action {
 			return;
 		}
 
-		// TODO: Use Narrator and the active scenario to resolve the item's effect.
+		// TODO: Use Narrator to resolve the item's effect.
 		session.respond(String.format(GameConstants.Messages.USE_RESPONSE, item.getName()));
 	}
 }
