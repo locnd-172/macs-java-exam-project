@@ -27,6 +27,6 @@ public class Main {
 			narrator
 		);
 
-		new Game(new Scanner(System.in), gameService).start();
+		new GameConsole(new Scanner(System.in), gameService).start();
 	}
 }

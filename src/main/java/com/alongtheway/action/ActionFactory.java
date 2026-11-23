@@ -1,8 +1,8 @@
 package com.alongtheway.action;
 
+import com.alongtheway.action.impl.AssistAction;
 import com.alongtheway.action.impl.DropAction;
 import com.alongtheway.action.impl.ExamineAction;
-import com.alongtheway.action.impl.HelpAction;
 import com.alongtheway.action.impl.MoveAction;
 import com.alongtheway.action.impl.TakeAction;
 import com.alongtheway.action.impl.TalkAction;
@@ -30,7 +30,7 @@ public class ActionFactory {
 			case DROP -> new DropAction(command);
 			case TALK -> new TalkAction(command);
 			case USE -> new UseAction(command);
-			case HELP -> new HelpAction(command);
+			case ASSIST -> new AssistAction(command);
 			case JOURNAL -> new JournalAction(command);
 			default -> null;
 		};

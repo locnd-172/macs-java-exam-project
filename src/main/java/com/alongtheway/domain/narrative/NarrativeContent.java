@@ -38,7 +38,7 @@ public class NarrativeContent {
         this.itemResponses = itemResponses;
     }
 
-    public String message(String scenarioId, Location location, Character character, Item item, String topic) {
+    public String message(Location location, Character character, Item item, String topic) {
         return GameConstants.Messages.GENERIC_NARRATION;
     }
 }

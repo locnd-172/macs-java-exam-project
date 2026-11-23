@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 import com.alongtheway.service.GameService;
 
-public class Game {
+public class GameConsole {
 
 	private final Scanner input;
 	private final GameService gameService;
 
-	public Game(Scanner input, GameService gameService) {
+	public GameConsole(Scanner input, GameService gameService) {
 		this.input = input;
 		this.gameService = gameService;
 	}

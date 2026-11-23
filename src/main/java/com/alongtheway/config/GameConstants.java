@@ -19,13 +19,6 @@ public final class GameConstants {
 		public static final String SAVE_DIRECTORY = "src/main/resources/saves";
 	}
 
-	public static final class Narrative {
-		private Narrative() {
-		}
-
-		public static final String DEFAULT_SCENARIO_ID = "default";
-	}
-
 	public static final class Text extends TextConstants {
 		private Text() {
 		}

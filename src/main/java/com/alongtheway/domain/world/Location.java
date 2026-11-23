@@ -3,7 +3,6 @@ package com.alongtheway.domain.world;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alongtheway.domain.narrative.Scenario;
 import com.alongtheway.util.TextUtils;
 
 public class Location {
@@ -15,7 +14,6 @@ public class Location {
 	private List<Location> links = new ArrayList<>();
 	private List<Character> characters = new ArrayList<>();
 	private List<Item> items = new ArrayList<>();
-	private List<Scenario> scenarios = new ArrayList<>();
 
 	/**
 	 * Creates a location with the supplied descriptive data.
