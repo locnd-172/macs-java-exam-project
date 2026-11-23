@@ -17,7 +17,7 @@ import com.alongtheway.domain.world.Location;
 import com.alongtheway.domain.world.World;
 import com.alongtheway.parser.CommandParser;
 
-class HelpActionTest {
+class AssistActionTest {
 	private World world;
 
 	private Location garden;
@@ -55,10 +55,10 @@ class HelpActionTest {
 	}
 
 	@Test
-	void testHelpCharacter() {
+	void testAssistCharacter() {
 		factory.create(parser.parse("help to the gardener")).execute(session);
 		assertEquals(
-			String.format(GameConstants.Messages.HELP_RESPONSE, thomas.getName()),
+			String.format(GameConstants.Messages.ASSIST_RESPONSE, thomas.getName()),
 			session.takeMessage()
 		);
 	}
@@ -66,12 +66,12 @@ class HelpActionTest {
 	@Test
 	void testUnknownCharacter() {
 		factory.create(parser.parse("help Mara")).execute(session);
-		assertEquals(GameConstants.Messages.HELP_CHARACTER_NOT_FOUND, session.takeMessage());
+		assertEquals(GameConstants.Messages.ASSIST_CHARACTER_NOT_FOUND, session.takeMessage());
 	}
 
 	@Test
 	void testMissingTarget() {
 		factory.create(parser.parse("help")).execute(session);
-		assertEquals(GameConstants.Messages.HELP_TARGET_REQUIRED, session.takeMessage());
+		assertEquals(GameConstants.Messages.ASSIST_TARGET_REQUIRED, session.takeMessage());
 	}
 }

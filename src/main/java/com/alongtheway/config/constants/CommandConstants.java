@@ -31,7 +31,7 @@ public abstract class CommandConstants {
 		"use", "try"
 	);
 
-	public static final Set<String> HELP_TOKENS = Set.of(
+	public static final Set<String> ASSIST_TOKENS = Set.of(
 		"help", "offer"
 	);
 
