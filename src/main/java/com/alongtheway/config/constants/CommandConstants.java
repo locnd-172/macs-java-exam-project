@@ -32,7 +32,11 @@ public abstract class CommandConstants {
 	);
 
 	public static final Set<String> ASSIST_TOKENS = Set.of(
-		"help", "offer"
+		"help", "offer", "support"
+	);
+
+	public static final Set<String> HELP_TOKENS = Set.of(
+		"help"
 	);
 
 	public static final Set<String> TAKE_TOKENS = Set.of(

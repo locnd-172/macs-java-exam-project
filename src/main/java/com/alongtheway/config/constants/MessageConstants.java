@@ -28,6 +28,19 @@ public abstract class MessageConstants {
 	public static final String ASSIST_CHARACTER_NOT_FOUND = "No one here goes by that name.";
 	public static final String ASSIST_RESPONSE = "You offer to help %s.";
 
+	public static final String HELP_COMMANDS = """
+		You can try commands such as:
+		  go to <place>               e.g. go to the cafe
+		  look around                 e.g. look around
+		  examine <thing or person>   e.g. examine notice board
+		  talk to <person>            e.g. talk to Emma about the journal
+		  help <person>               e.g. help the gardener
+		  take <item>                 e.g. take journal
+		  drop <item>                 e.g. drop journal
+		  use <item>                  e.g. use old key
+		  journal                     e.g. journal
+		  help                        shows this list""";
+
 	public static final String EXAMINE_TARGET_REQUIRED = "What do you want to check?";
 	public static final String EXAMINE_TARGET_NOT_FOUND = "There's no such item here!";
 	public static final String EXAMINE_DESCRIPTION_UNAVAILABLE = "There is nothing more to notice!";

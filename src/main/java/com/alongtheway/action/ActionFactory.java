@@ -3,11 +3,12 @@ package com.alongtheway.action;
 import com.alongtheway.action.impl.AssistAction;
 import com.alongtheway.action.impl.DropAction;
 import com.alongtheway.action.impl.ExamineAction;
+import com.alongtheway.action.impl.HelpAction;
+import com.alongtheway.action.impl.JournalAction;
 import com.alongtheway.action.impl.MoveAction;
 import com.alongtheway.action.impl.TakeAction;
 import com.alongtheway.action.impl.TalkAction;
 import com.alongtheway.action.impl.UseAction;
-import com.alongtheway.action.impl.JournalAction;
 import com.alongtheway.parser.Command;
 
 public class ActionFactory {
@@ -31,8 +32,13 @@ public class ActionFactory {
 			case TALK -> new TalkAction(command);
 			case USE -> new UseAction(command);
 			case ASSIST -> new AssistAction(command);
+			case HELP -> hasTarget(command) ? new AssistAction(command) : new HelpAction();
 			case JOURNAL -> new JournalAction(command);
 			default -> null;
 		};
+	}
+
+	private boolean hasTarget(Command command) {
+		return command.getTarget() != null && !command.getTarget().isBlank();
 	}
 }

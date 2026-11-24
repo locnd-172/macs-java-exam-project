@@ -71,7 +71,7 @@ class AssistActionTest {
 
 	@Test
 	void testMissingTarget() {
-		factory.create(parser.parse("help")).execute(session);
+		factory.create(parser.parse("offer")).execute(session);
 		assertEquals(GameConstants.Messages.ASSIST_TARGET_REQUIRED, session.takeMessage());
 	}
 }
