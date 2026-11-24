@@ -10,6 +10,7 @@ public enum CommandVerb {
 	TALK,
 	USE,
 	ASSIST,
+	HELP,
 	JOURNAL,
 	UNKNOWN;
 
@@ -29,6 +30,7 @@ public enum CommandVerb {
 		if (GameConstants.Commands.USE_TOKENS.contains(token)) return USE;
 		if (GameConstants.Commands.JOURNAL_TOKENS.contains(token)) return JOURNAL;
 		if (GameConstants.Commands.ASSIST_TOKENS.contains(token)) return ASSIST;
+		if (GameConstants.Commands.HELP_TOKENS.contains(token)) return HELP;
 		return UNKNOWN;
 	}
 }
