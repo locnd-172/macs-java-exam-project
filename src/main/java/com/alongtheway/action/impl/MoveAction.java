@@ -4,6 +4,7 @@ import com.alongtheway.action.Action;
 import com.alongtheway.config.GameConstants;
 import com.alongtheway.domain.GameSession;
 import com.alongtheway.domain.player.Player;
+import com.alongtheway.domain.world.Direction;
 import com.alongtheway.domain.world.Location;
 import com.alongtheway.parser.Command;
 
@@ -22,28 +23,31 @@ public class MoveAction implements Action {
 	@Override
 	public void execute(GameSession session) {
 		String target = command.getTarget();
-		Location destination = session.getWorld().findLocation(target);
+		Player player = session.getPlayer();
+
+		Location current = player.getLocation();
+
+		Direction direction = Direction.fromText(target);
+		Location destination = direction != null
+							   ? current.getLink(direction)
+							   : session.getWorld().findLocation(target);
 
 		if (destination == null) {
 			session.respond(GameConstants.Messages.MOVE_UNKNOWN);
 			return;
 		}
 
-		Player player = session.getPlayer();
-		Location currentLocation = player.getLocation();
-
-		if (currentLocation.equals(destination)) {
+		if (current.equals(destination)) {
 			session.respond(GameConstants.Messages.MOVE_ALREADY_THERE);
 			return;
 		}
 
-		if (!currentLocation.hasLink(destination)) {
+		if (!current.hasLink(destination)) {
 			session.respond(GameConstants.Messages.MOVE_BLOCKED);
 			return;
 		}
 
 		player.setLocation(destination);
-		String response = String.format(GameConstants.Messages.MOVE_ARRIVAL, destination.getName());
-		session.respond(response);
+		session.respond(String.format(GameConstants.Messages.MOVE_ARRIVAL, destination.getName()));
 	}
 }
