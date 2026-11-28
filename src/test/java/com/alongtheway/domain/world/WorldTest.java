@@ -65,7 +65,7 @@ class WorldTest {
 
 	@Test
 	void testLinks() {
-		square.addLink(cafe);
+		square.addLink(Direction.EAST, cafe);
 		world.addLocation(square);
 		world.addLocation(cafe);
 

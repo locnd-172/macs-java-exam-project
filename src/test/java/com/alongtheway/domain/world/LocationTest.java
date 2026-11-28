@@ -25,15 +25,39 @@ class LocationTest {
 
 	@Test
 	void testLinks() {
-		square.addLink(null);
-		square.addLink(square);
-		square.addLinks(List.of(cafe, cafe));
+		square.addLink(null, cafe);
+		square.addLink(Direction.EAST, null);
+		square.addLink(Direction.EAST, square);
+		square.addLink(Direction.EAST, cafe);
+		square.addLink(Direction.NORTH, cafe);
 
 		assertTrue(square.hasLink(cafe));
 		assertFalse(square.hasLink(square));
-		assertEquals(1, square.getLinks().size());
+		assertEquals(List.of(cafe), square.getLinks());
 
 		square.removeLink(cafe);
+		assertFalse(square.hasLink(cafe));
+		assertNull(square.getLink(Direction.EAST));
+		assertNull(square.getLink(Direction.NORTH));
+	}
+
+	@Test
+	void testLinkByDirection() {
+		square.addLink(Direction.NORTH, cafe);
+		square.addLink(Direction.SOUTHWEST, bookshop);
+
+		assertSame(cafe, square.getLink(Direction.NORTH));
+		assertSame(bookshop, square.getLink(Direction.SOUTHWEST));
+		assertNull(square.getLink(Direction.EAST));
+		assertNull(square.getLink(null));
+	}
+
+	@Test
+	void testOneDirectionOneLink() {
+		square.addLink(Direction.EAST, cafe);
+		square.addLink(Direction.EAST, bookshop);
+
+		assertSame(bookshop, square.getLink(Direction.EAST));
 		assertFalse(square.hasLink(cafe));
 	}
 

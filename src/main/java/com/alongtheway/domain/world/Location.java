@@ -1,7 +1,9 @@
 package com.alongtheway.domain.world;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 import com.alongtheway.util.TextUtils;
 
@@ -11,7 +13,7 @@ public class Location {
 	private String name;
 	private String description;
 	private List<String> aliases = new ArrayList<>();
-	private List<Location> links = new ArrayList<>();
+	private Map<Direction, Location> links = new EnumMap<>(Direction.class);
 	private List<Character> characters = new ArrayList<>();
 	private List<Item> items = new ArrayList<>();
 
@@ -120,46 +122,44 @@ public class Location {
 	}
 
 	/**
-	 * Adds a link to another location (one-directional)
+	 * Adds an exit to another location (one-directional).
+	 * An exit already in that direction is replaced.
 	 *
-	 * @param adjacency the location to link from this location
+	 * @param direction the direction of the exit
+	 * @param adjacency the location the exit leads to
 	 */
-	public void addLink(Location adjacency) {
-		if (adjacency != null && adjacency != this && !links.contains(adjacency)) {
-			this.links.add(adjacency);
+	public void addLink(Direction direction, Location adjacency) {
+		if (direction != null && adjacency != null && adjacency != this) {
+			this.links.put(direction, adjacency);
 		}
 	}
 
 	/**
-	 * Adds links to other locations in bulk.
-	 *
-	 * @param adjacencies the locations to link from this location
-	 */
-	public void addLinks(List<Location> adjacencies) {
-		if (adjacencies == null) {
-			return;
-		}
-		for (Location adjacency : adjacencies) {
-			this.addLink(adjacency);
-		}
-	}
-
-	/**
-	 * Removes a direct link to the given location if one exists.
+	 * Removes every exit that leads to the given location.
 	 *
 	 * @param adjacency the linked location to remove
 	 */
 	public void removeLink(Location adjacency) {
-		this.links.remove(adjacency);
+		this.links.values().removeIf(link -> link.equals(adjacency));
 	}
 
 	/**
 	 * Returns a copy of the locations linked from this location.
 	 *
-	 * @return an unmodifiable list of outgoing links
+	 * @return an unmodifiable list of the locations the exits lead to
 	 */
 	public List<Location> getLinks() {
-		return List.copyOf(links);
+		return links.values().stream().distinct().toList();
+	}
+
+	/**
+	 * Returns the location in the given direction.
+	 *
+	 * @param direction the compass direction
+	 * @return the linked location, or null if there is none
+	 */
+	public Location getLink(Direction direction) {
+		return links.get(direction);
 	}
 
 	/**
@@ -169,7 +169,7 @@ public class Location {
 	 * @return {@code true} if a direct link exists
 	 */
 	public boolean hasLink(Location otherLocation) {
-		return this.links.contains(otherLocation);
+		return this.links.containsValue(otherLocation);
 	}
 
 	/**

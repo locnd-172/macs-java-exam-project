@@ -2,28 +2,29 @@ package com.alongtheway.repository;
 
 import com.alongtheway.config.GameConstants;
 import com.alongtheway.domain.world.Character;
+import com.alongtheway.domain.world.Direction;
 import com.alongtheway.domain.world.Item;
 import com.alongtheway.domain.world.Location;
 import com.alongtheway.domain.world.World;
-
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
 
 import static com.alongtheway.repository.JsonUtils.text;
+import static com.alongtheway.repository.JsonUtils.textMap;
 import static com.alongtheway.repository.JsonUtils.texts;
 
 public class WorldRepository {
 
     private final JsonNode root;
 
-    private static final String LOCATIONS  = "locations";
+    private static final String LOCATIONS = "locations";
     private static final String CHARACTERS = "characters";
-    private static final String ITEMS      = "items";
-    private static final String ID         = "id";
-    private static final String NAME       = "name";
-    private static final String LINKS      = "links";
-    private static final String ALIASES    = "aliases";
+    private static final String ITEMS = "items";
+    private static final String ID = "id";
+    private static final String NAME = "name";
+    private static final String LINKS = "links";
+    private static final String ALIASES = "aliases";
 
     /**
      * Reads the world file.
@@ -76,16 +77,24 @@ public class WorldRepository {
     }
 
     /**
-     * Links the locations to each other.
+     * Links the locations to each other, in both directions.
      *
      * @param world the world whose locations are built
      */
     private void linkLocations(World world) {
         for (JsonNode node : root.path(LOCATIONS)) {
-            Location location = world.getLocationById(text(node, ID));
-            for (String linkedId : texts(node.path(LINKS))) {
-                location.addLink(world.getLocationById(linkedId));
-            }
+            Location from = world.getLocationById(text(node, ID));
+
+            textMap(node.path(LINKS)).forEach(
+                (directionText, locationId) -> {
+                    Direction direction = Direction.fromText(directionText);
+                    Location to = world.getLocationById(locationId);
+
+                    if (direction != null && to != null) {
+                        from.addLink(direction, to);
+                        to.addLink(direction.opposite(), from);
+                    }
+                });
         }
     }
 

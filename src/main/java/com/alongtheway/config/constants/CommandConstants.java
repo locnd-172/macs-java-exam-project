@@ -32,7 +32,7 @@ public abstract class CommandConstants {
 	);
 
 	public static final Set<String> ASSIST_TOKENS = Set.of(
-		"help", "offer", "support"
+		"offer", "support"
 	);
 
 	public static final Set<String> HELP_TOKENS = Set.of(
@@ -50,5 +50,7 @@ public abstract class CommandConstants {
 	public static final Set<String> QUIT_TOKENS = Set.of(
 		"quit", "exit", "stop"
 	);
+
+    public static final String DIRECTION_FILLER_REGEX = "\\b(to|the|toward|towards)\\b";
 
 }

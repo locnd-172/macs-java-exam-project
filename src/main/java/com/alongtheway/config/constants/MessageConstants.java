@@ -9,7 +9,7 @@ public abstract class MessageConstants {
 	public static final String ERROR_RESOURCE_NOT_FOUND = "Could not find %s.";
 
 	public static final String MOVE_ARRIVAL = "You made your way to %s.";
-	public static final String MOVE_UNKNOWN = "There's no a place by that name.";
+	public static final String MOVE_UNKNOWN = "You don't see a way to go there.";
 	public static final String MOVE_ALREADY_THERE = "You are already here.";
 	public static final String MOVE_BLOCKED = "You can't reach that place from here.";
 
@@ -31,6 +31,7 @@ public abstract class MessageConstants {
 	public static final String HELP_COMMANDS = """
 		You can try commands such as:
 		  go to <place>               e.g. go to the cafe
+		  go <direction>              e.g. go north, go south-east
 		  look around                 e.g. look around
 		  examine <thing or person>   e.g. examine notice board
 		  talk to <person>            e.g. talk to Emma about the journal

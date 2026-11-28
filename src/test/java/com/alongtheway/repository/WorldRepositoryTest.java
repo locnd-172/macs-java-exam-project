@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import com.alongtheway.config.GameConstants;
 import com.alongtheway.domain.world.Character;
+import com.alongtheway.domain.world.Direction;
 import com.alongtheway.domain.world.Item;
 import com.alongtheway.domain.world.Location;
 import com.alongtheway.domain.world.World;
@@ -81,6 +82,33 @@ class WorldRepositoryTest {
 
         assertNull(cafe.findItem("journal"));
         assertNotNull(square.findItem("notice board"));
+    }
+
+    @Test
+    void linksLocationsByDirection() {
+        Location entrance = world.getLocationById("village-entrance");
+        Location square = world.getLocationById("village-square");
+        Location cafe = world.getLocationById("cafe");
+        Location bookshop = world.getLocationById("old-bookshop");
+        Location garden = world.getLocationById("garden");
+
+        assertSame(square, entrance.getLink(Direction.NORTH));
+        assertSame(entrance, square.getLink(Direction.SOUTH));
+
+        assertSame(cafe, square.getLink(Direction.EAST));
+        assertSame(square, cafe.getLink(Direction.WEST));
+
+        assertSame(bookshop, square.getLink(Direction.WEST));
+        assertSame(square, bookshop.getLink(Direction.EAST));
+
+        assertSame(garden, square.getLink(Direction.NORTH));
+        assertSame(square, garden.getLink(Direction.SOUTH));
+
+        assertSame(bookshop, garden.getLink(Direction.SOUTHWEST));
+        assertSame(garden, bookshop.getLink(Direction.NORTHEAST));
+
+        assertNull(entrance.getLink(Direction.SOUTH));
+        assertNull(cafe.getLink(Direction.NORTH));
     }
 
     @Test
