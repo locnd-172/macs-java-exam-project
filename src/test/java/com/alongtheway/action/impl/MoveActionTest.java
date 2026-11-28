@@ -113,6 +113,13 @@ public class MoveActionTest {
 		assertSame(cafe, player.getLocation());
 		assertEquals(GameConstants.Messages.MOVE_UNKNOWN, session.takeMessage());
 
+		// unsupported directions
+		for (String input : List.of("go ahead", "move forwards", "move backwards", "move left", "move right")) {
+			go(input);
+			assertSame(cafe, player.getLocation());
+			assertEquals(GameConstants.Messages.MOVE_UNKNOWN, session.takeMessage());
+		}
+
 		// missing target
 		go("go");
 		assertSame(cafe, player.getLocation());
